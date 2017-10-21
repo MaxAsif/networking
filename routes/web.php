@@ -14,9 +14,7 @@
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/viewdata',function(){
-	return view('viewdata');
-});
+Route::get('/viewdata','AlumniController@get');
 
 
 Route::get('/addalumni',function(){
