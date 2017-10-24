@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<script type="text/javascript">
+  function call()
+  {
+    window.location = '/viewdata';
+  }
+</script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -82,9 +88,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
        <div class="w3-twothird">
     
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>VIEW DATA</h2>
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal" ></i>VIEW DATA</h2>
         <div class="w3-container">
-         <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary">Information</button></div>
+         <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary" onclick="call();">Information</button></div>
           <p>Click the button above to view all the networking data and edit it if needed.</p>
           <hr>
         </div>
