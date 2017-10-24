@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\smember;
+use App\coordinator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -52,7 +54,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'type' => 'required',
-        ]);
+            ]);
     }
 
     /**
@@ -63,11 +65,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if($data['type']=='SM')
+        {
+            smember::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'url' => '',
+                'access' => '',
+                ]);
+        }
+        elseif ($data['type']=='CO')
+        {
+            coordinator::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'url' => '',
+                ]);
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'type' => $data['type'],
-        ]);
+            ]);
     }
 }
