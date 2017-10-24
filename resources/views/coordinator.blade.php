@@ -2,9 +2,6 @@
 
 @section('content')
 
-<!DOCTYPE html>
-<html>
-<title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -81,14 +78,31 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     </div>
 
     <!-- Right Column -->
-    <div class="w3-twothird">
+       <div class="w3-twothird">
     
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-      
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>VIEW DATA</h2>
         <div class="w3-container">
+         <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary">Information</button></div>
+          <p>Click the button above to view all the networking data and edit it if needed.</p>
+          <hr>
+        </div>
+        <br />
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>TAGS</b></h5>
+          <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary">TAGS</button></div>
           
+          <p>You can create tags,assign tags to alumni and also delete them.Click the button to do it.</p>
+          <hr>
+        </div>
+        <br />
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>ACCESS</b></h5>
+           <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary">ACCESS</button></div>
+          <p>You can give access to student members of the data of alumni of our instituion.Click the button to see it. </p><br>
         </div>
       </div>
+
 
     <!-- End Right Column -->
     </div>
@@ -109,10 +123,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <i class="fa fa-linkedin w3-hover-opacity"></i>
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
-
-</body>
-</html>
-
 
 
 
