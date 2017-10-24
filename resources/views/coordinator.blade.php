@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    Welcome as coordiantor
+                    Welcome as coordinator
                 </div>
             </div>
         </div>
