@@ -29,13 +29,13 @@ $factory->define(App\Alumni::class, function (Faker $faker) {
     
     return [
         'email' => $faker->safeEmail,
-        'name' =>'Noemi Paucek',
-        'address' =>$faker->sentence,
-        'city' =>$faker->sentence,
-        'country' =>$faker->sentence,
-        'mobile' =>$faker->sentence,
+        'name' =>$faker->name,
+        'address' =>$faker->address,
+        'city' =>$faker->city,
+        'country' =>$faker->country,
+        'mobile' =>$faker->e164PhoneNumber,
         'dob' =>$faker->date,
-        'industry' =>$faker->sentence,
+        'industry' =>$faker->company,
 
 
     ];
