@@ -40,3 +40,4 @@ $factory->define(App\Alumni::class, function (Faker $faker) {
 
     ];
 });
+
