@@ -39,9 +39,8 @@
                     <ul class="nav navbar-nav">
                         &nbsp;
                         @auth
-                        <li><a href="#">Page1</a></li>
-                        <li><a href="#">Page2</a></li>
-                        <li><a href="#">Page3</a></li>
+                        <li><a href="/home">Home</a></li>
+                        
                         @endauth
 
                     </ul>

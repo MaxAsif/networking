@@ -18,7 +18,8 @@ Route::get('/viewdata','AlumniController@get');
 
 
 Route::get('/addalumni',function(){
-	return view('addalumni');
+	$message = '';
+	return view('addalumni',compact('message'));
 });
 
 

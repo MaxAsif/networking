@@ -8,6 +8,16 @@ class AlumniController extends Controller
 {
     public function index()
     {
+        $this->validate(request(),[
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'mobile' => 'required',
+            'dob' => 'required',
+            'industry' => 'required',
+        ]);
     	Alumni::create([
     		'name' => request('name'),
     		'email' => request('email'),
@@ -19,6 +29,8 @@ class AlumniController extends Controller
     		'industry' => request('industry'),
 
     	]);
+        $message = 'Alumni has been added to databse succesfully!';
+        return view('addalumni',compact('message'));
     }
     public function get()
     {
