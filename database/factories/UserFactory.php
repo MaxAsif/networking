@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use Faker\Generator as Faker;
 
@@ -15,11 +15,28 @@ use Faker\Generator as Faker;
 
 $factory->define(App\User::class, function (Faker $faker) {
     static $password;
-
+    $a = array('SM','CO' );
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'type' => $a[array_rand($a)],
+    ];
+});
+
+$factory->define(App\Alumni::class, function (Faker $faker) {
+    
+    return [
+        'email' => $faker->safeEmail,
+        'name' =>$faker->name,
+        'address' =>$faker->address,
+        'city' =>$faker->city,
+        'country' =>$faker->country,
+        'mobile' =>$faker->e164PhoneNumber,
+        'dob' =>$faker->date,
+        'industry' =>$faker->company,
+
+
     ];
 });
