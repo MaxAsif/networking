@@ -6,6 +6,19 @@
   {
     window.location = '/viewdata';
   }
+   function addtag()
+  {
+    window.location = '/addtag';
+  }
+   function access()
+  {
+    window.location = '/access';
+  }
+   function add()
+  {
+    window.location = '/addalumni';
+  }
+
 </script>
 
 <meta charset="UTF-8">
@@ -107,6 +120,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <h5 class="w3-opacity"><b>ACCESS</b></h5>
            <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary">ACCESS</button></div>
           <p>You can give access to student members of the data of alumni of our instituion.Click the button to see it. </p><br>
+        </div>
+
+
+         <br />
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>ADD ALUMNI</b></h5>
+           <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary" onclick="add();">ADD</button></div>
+          <p>You can add data of alumni of our instituion which are still not connected to us.Click the button to see it. </p><br>
         </div>
       </div>
 
