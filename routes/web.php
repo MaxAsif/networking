@@ -17,3 +17,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/viewdata',function(){
 	return view('viewdata');
 });
+
+
+Route::get('/addalumni',function(){
+	return view('addalumni');
+});
+
+
+Route::get('/addtag',function(){
+	return view('addtag');
+});
+
+
+Route::get('/access',function(){
+	return view('access');
+});
