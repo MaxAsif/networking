@@ -110,7 +110,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <br />
         <div class="w3-container">
           <h5 class="w3-opacity"><b>TAGS</b></h5>
-          <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary">TAGS</button></div>
+          <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary" onclick="addtag();">TAGS</button></div>
           
           <p>You can create tags,assign tags to alumni and also delete them.Click the button to do it.</p>
           <hr>
@@ -118,7 +118,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <br />
         <div class="w3-container">
           <h5 class="w3-opacity"><b>ACCESS</b></h5>
-           <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary">ACCESS</button></div>
+           <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary" onclick="access();">ACCESS</button></div>
           <p>You can give access to student members of the data of alumni of our instituion.Click the button to see it. </p><br>
         </div>
 
