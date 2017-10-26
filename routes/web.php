@@ -28,3 +28,4 @@ Route::get('/addtag','AddtagController@index');
 Route::post('/addalumni','AlumniController@index');
 
 
+Route::get('/access','AccessController@index');
