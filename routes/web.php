@@ -29,6 +29,3 @@ Route::get('/addtag',function(){
 });
 
 
-Route::get('/access',function(){
-	return view('access');
-});
