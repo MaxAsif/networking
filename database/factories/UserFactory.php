@@ -41,3 +41,15 @@ $factory->define(App\Alumni::class, function (Faker $faker) {
     ];
 });
 
+
+$factory->define(App\smember::class, function (Faker $faker) {
+    
+    return [
+        'email' => $faker->safeEmail,
+        'name' =>$faker->name,
+        'url' =>$faker->text,
+
+
+    ];
+});
+

@@ -47,40 +47,26 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
  
 <div class="container">
-  <h2>ALUMNI DETAILS</h2>    
+  <h2>STUDENT MEMBERS DETAILS</h2>    
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>ALUMNI</th>
-        <th>DETAILS</th>
-        <th>TAG1</th>
-        <th>TAG2</th>
-        <th>TAG3</th>
+        <th>NAME</th>
+        <th>EMAIL</th>
+
+
 
       </tr>
     </thead>
     <tbody>
+
+      @foreach($smembers as $member)
       <tr>
-        <td>John</td>
-        <td>john@example.com</td>
-        <td>1973</td>
-        <td>NA</td>
-        <td>YES</td>
+        <td>{{$member['name']}}</td>        
+        <td>{{$member['email']}}</td>
+        
       </tr>
-      <tr>
-        <td>Mary</td>
-        <td>mary@example.com</td>
-        <td>1985</td>
-        <td>ME</td>
-        <td>NO</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>july@example.com</td>
-        <td>2001</td>
-        <td>CS</td>
-        <td>YES</td>
-      </tr>
+      @endforeach
     </tbody>
   </table>
 </div>
