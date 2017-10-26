@@ -64,14 +64,14 @@
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                             <label for="type" class="col-md-4 control-label"> Type </label>
                             <div class="col-md-6">
-                                <div class="form-check form-check-inline">
-                                  <label class="form-check-label">
-                                      <input class="form-check-input" type="checkbox" id="type" name="type" value="CO"> Coordinator
+                                <div class="form-radio form-radio-inline">
+                                  <label class="form-radio-label">
+                                      <input class="form-radio-input" type="radio" id="type" name="type" value="CO"> Coordinator
                                   </label>
                               </div>
-                              <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" id="type" name="type" value="SM"> Student Member
+                              <div class="form-radio form-radio-inline">
+                                <label class="form-radio-label">
+                                    <input class="form-radio-input" type="radio" id="type" name="type" value="SM"> Student Member
                                 </label>
                             </div>
                             @if ($errors->has('type'))
