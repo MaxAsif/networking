@@ -43,6 +43,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px">
 
+
+
  
 <div class="container">
   <h2>ALUMNI DETAILS</h2>    
@@ -50,23 +52,35 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <thead>
       <tr>
         <th>ALUMNI</th>
-        <th>EMAIL</th>
-        <th>INDUSTRY</th>
-        
+        <th>DETAILS</th>
+        <th>TAG1</th>
+        <th>TAG2</th>
+        <th>TAG3</th>
 
       </tr>
     </thead>
     <tbody>
-      
-      @foreach($alumni as $alum)
       <tr>
-        <td>{{$alum['name']}}</td>        
-        <td>{{$alum['email']}}</td>
-        <td>{{$alum['industry']}}</td>
-        
+        <td>John</td>
+        <td>john@example.com</td>
+        <td>1973</td>
+        <td>NA</td>
+        <td>YES</td>
       </tr>
-      @endforeach
-      
+      <tr>
+        <td>Mary</td>
+        <td>mary@example.com</td>
+        <td>1985</td>
+        <td>ME</td>
+        <td>NO</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>july@example.com</td>
+        <td>2001</td>
+        <td>CS</td>
+        <td>YES</td>
+      </tr>
     </tbody>
   </table>
 </div>

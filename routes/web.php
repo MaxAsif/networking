@@ -24,13 +24,5 @@ Route::get('/addalumni',function(){
 });
 
 
-Route::get('/addtag',function(){
-	return view('addtag');
-});
+Route::get('/addtag','AddtagController@index');
 
-
-Route::get('/access',function(){
-	return view('access');
-});
-
-Route::post('/addalumni','AlumniController@index');
