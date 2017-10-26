@@ -27,6 +27,3 @@ Route::get('/addalumni',function(){
 Route::get('/addtag','AddtagController@index');
 
 
-Route::get('/access',function(){
-	return view('access');
-});
