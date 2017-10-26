@@ -23,8 +23,11 @@ Route::get('/addalumni',function(){
 });
 
 
-Route::get('/addtag','AddtagController@index');
+
+Route::get('/addtag','TagslistController@index');
+
 Route::post('/addalumni','AlumniController@index');
+Route::post('/addtag','TagslistController@postdata');
 
 
 Route::get('/access','AccessController@index');

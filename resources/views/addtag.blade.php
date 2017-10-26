@@ -49,10 +49,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>ALUMNI</th>
-        <th>EMAIL</th>
-        <th>INDUSTRY</th>
-        
+        <th>ID</th>
+        <th>TAGNAME</th>
+                
 
       </tr>
     </thead>
@@ -60,9 +59,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       
       @foreach($alumni as $alum)
       <tr>
-        <td>{{$alum['name']}}</td>        
-        <td>{{$alum['email']}}</td>
-        <td>{{$alum['industry']}}</td>
+        <td>{{$alum['id']}}</td>        
+        <td>{{$alum['tagname']}}</td>
+        
         
       </tr>
       @endforeach
@@ -70,6 +69,93 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </tbody>
   </table>
 </div>
+
+
+<hr /><br /><br />
+
+
+
+
+<div class="container">
+  <h2>CREATE NEW TAG</h2>  
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Create</div>
+
+                <div class="panel-body">
+
+                    <form class="form-horizontal" method="POST" action="\addtag">
+                        {{ csrf_field() }}
+
+
+                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">Tag Name</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+
+                                @if ($errors->has('name'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-4">
+                            <button type="submit" class="btn btn-primary">
+                                Create
+                            </button>
+
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <!-- Pagination -->
   <div class="w3-center w3-padding-32">
