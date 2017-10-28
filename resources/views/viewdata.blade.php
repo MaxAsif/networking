@@ -120,37 +120,45 @@
   </script>
 
   <div class="col-sm-9">
-    <form action="/assigntag" method="POST">
-      {{csrf_field()}}
-      <table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-          <tr>
-            <th> SELECT</th>
-            <th>ALUMNI</th>
-            <th>EMAIL</th>
-            <th>INDUSTRY</th>
-            <th>TAGS</th>
+      @if($message!='')
+                    <div class="alert alert-success">
+                        <strong>Message :</strong>{{$message }}
+                    </div>
+                    <br>
+                    @endif
+    <table id="example" class="display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th> SELECT</th>
+          <th>ALUMNI</th>
+          <th>EMAIL</th>
+          <th>INDUSTRY</th>
+          <th>TAGS</th>
+          <th>ADD TAG</th>
 
+        </tr>
+      </thead>
+      <tbody>
 
-          </tr>
-        </thead>
-        <tbody>
-
-          @foreach($alumni as $alum)
-          <tr>
-             <td> <input type="checkbox" name="alumid" value="{{$alum['id']}}" id="alumid" onclick="enabble({{$alum['id']}});"></td>
+        @foreach($alumni as $alum)
+        <tr>
+      
+          <form action="/assigntag" method="POST">
+            {{csrf_field()}}
+            <td> <input type="checkbox" name="alumid" value="{{$alum['id']}}" id="alumid" onclick="enabble({{$alum['id']}});"></td>
             <td>{{$alum['name']}}</td>        
             <td>{{$alum['email']}}</td>
             <td>{{$alum['industry']}}</td>
-            <td><input type="text" name="tag_S" id="{{$alum['id']}}" readonly></td>
-
+            <td><input type="text" name="tag" id="{{$alum['id']}}" readonly></td>
+            <td><input type="submit" name="submit" value="Add"></td>
+            </form>
           </tr>
           @endforeach
 
         </tbody>
       </table>
-      <input type="submit" name="submit">
-    </form>
+      
+    
   </div>
 
 
