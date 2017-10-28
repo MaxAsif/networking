@@ -10,11 +10,11 @@ class AddtagController extends Controller
 {
     public function index()
     {
-    	
+    	dd($_POST);
     	Addtag::create([
     			'alum_id' => request('alumid'),
-    			'alum_name' => ALumni::find(request('alumid'))->name,
-    			'tags' => request('tag')
+    			
+    			'tags' => request('tag'),
 
     		]);
     	$message = 'Tag has been added succesfully';

@@ -13,11 +13,11 @@ class CreateAddtagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('alumtag', function (Blueprint $table) {
+        Schema::create('addtags', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('alum_id');
-            $table->text('alum_name');
+            $table->text('alum_id');
+           
             $table->text('tags');
 
         });

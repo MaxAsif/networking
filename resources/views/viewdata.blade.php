@@ -138,11 +138,11 @@
 
           @foreach($alumni as $alum)
           <tr>
-             <td> <input type="checkbox" name="alumid_{{$alum['id']}}" value="{{$alum['id']}}" id="alumid" onclick="enabble({{$alum['id']}});"></td>
+             <td> <input type="checkbox" name="alumid" value="{{$alum['id']}}" id="alumid" onclick="enabble({{$alum['id']}});"></td>
             <td>{{$alum['name']}}</td>        
             <td>{{$alum['email']}}</td>
             <td>{{$alum['industry']}}</td>
-            <td><input type="text" name="tag_{{$alum['id']}}" id="{{$alum['id']}}" readonly></td>
+            <td><input type="text" name="tag_S" id="{{$alum['id']}}" readonly></td>
 
           </tr>
           @endforeach
