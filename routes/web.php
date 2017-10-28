@@ -31,7 +31,4 @@ Route::post('/addtag','TagslistController@postdata');
 
 
 Route::get('/access','AccessController@index');
-Route::post('/assigntag',function(){
-	
-	return view('assigntag');
-});
+Route::post('/assigntag','AddtagController@index');

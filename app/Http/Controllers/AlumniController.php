@@ -35,7 +35,8 @@ class AlumniController extends Controller
     public function get()
     {
         $alumni = Alumni::get();
-        return view('viewdata',compact('alumni'));
+        $message = '';
+        return view('viewdata',compact('alumni','message'));
     }
 }
   
