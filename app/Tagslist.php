@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tagslist extends Model
 {
-	public $table = "tagslist";
+	public $table = "tagslists";
      protected $fillable = [
         'id', 'tagname',
     ];

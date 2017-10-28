@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Alumni;
+use App\Tagslist;
 class AlumniController extends Controller
 {
     public function index()
@@ -36,7 +37,9 @@ class AlumniController extends Controller
     {
         $alumni = Alumni::get();
         $message = '';
-        return view('viewdata',compact('alumni','message'));
+        $tags = Tagslist::get();
+    
+        return view('viewdata',compact('alumni','message','tags'));
     }
 }
   

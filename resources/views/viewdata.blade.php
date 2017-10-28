@@ -120,12 +120,12 @@
   </script>
 
   <div class="col-sm-9">
-      @if($message!='')
-                    <div class="alert alert-success">
-                        <strong>Message :</strong>{{$message }}
-                    </div>
-                    <br>
-                    @endif
+    @if($message!='')
+    <div class="alert alert-success">
+      <strong>Message :</strong>{{$message }}
+    </div>
+    <br>
+    @endif
     <table id="example" class="display" cellspacing="0" width="100%">
       <thead>
         <tr>
@@ -142,27 +142,34 @@
 
         @foreach($alumni as $alum)
         <tr>
-      
+
           <form action="/assigntag" method="POST">
             {{csrf_field()}}
             <td> <input type="checkbox" name="alumid" value="{{$alum['id']}}" id="alumid" onclick="enabble({{$alum['id']}});"></td>
             <td>{{$alum['name']}}</td>        
             <td>{{$alum['email']}}</td>
             <td>{{$alum['industry']}}</td>
-            <td><input type="text" name="tag" id="{{$alum['id']}}" readonly></td>
-            <td><input type="submit" name="submit" value="Add"></td>
-            </form>
-          </tr>
-          @endforeach
+            <td><select name="tag" id="{{$alum['id']}}" readonly>
+              @foreach($tags as $tag)
+              <option value="{{$tag['tagname']}}">{{$tag['tagname']}}</option>
+              @endforeach
+            </select>
+          </td>
+          
+          <!--<td><input type="text" name="tag" id="{{$alum['id']}}" readonly></td>-->
+          <td><input type="submit" name="submit" value="Add"></td>
+        </form>
+      </tr>
+      @endforeach
 
-        </tbody>
-      </table>
-      
-    
-  </div>
+    </tbody>
+  </table>
+  
+  
+</div>
 
 
-  <script type="text/javascript">
+<script type="text/javascript">
   // For demo to fit into DataTables site builder...
   $('#example')
   .removeClass( 'display' )
