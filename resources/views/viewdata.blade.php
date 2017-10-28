@@ -22,6 +22,10 @@
       document.getElementById("mySidenav").style.width = "250px";
       document.getElementById("main").style.marginLeft = "250px";
     } );
+    function enabble(id)
+    {
+      document.getElementById(id).removeAttribute('readonly');
+    }
   </script>
 </head>
 <body>
@@ -121,7 +125,7 @@
       <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
           <tr>
-          <th> SELECT</th>
+            <th> SELECT</th>
             <th>ALUMNI</th>
             <th>EMAIL</th>
             <th>INDUSTRY</th>
@@ -134,11 +138,11 @@
 
           @foreach($alumni as $alum)
           <tr>
-            <td> <input type="checkbox" name="alumid" value="{{$alum['id']}}" id="alumid" >{{   $alum['id']}}</td>
+             <td> <input type="checkbox" name="alumid_{{$alum['id']}}" value="{{$alum['id']}}" id="alumid" onclick="enabble({{$alum['id']}});"></td>
             <td>{{$alum['name']}}</td>        
             <td>{{$alum['email']}}</td>
             <td>{{$alum['industry']}}</td>
-            <td><input type="text" name="tag"></td>
+            <td><input type="text" name="tag_{{$alum['id']}}" id="{{$alum['id']}}" readonly></td>
 
           </tr>
           @endforeach
