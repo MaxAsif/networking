@@ -18,6 +18,7 @@
   <script type="text/javascript" src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
   <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
+      
       $('#example').DataTable();
       document.getElementById("mySidenav").style.width = "250px";
       document.getElementById("main").style.marginLeft = "250px";
@@ -112,6 +113,10 @@
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("main").style.marginLeft= "0";
     }
+    function enabble(id)
+    {
+        document.getElementById(id).removeAttribute('readonly');
+    }
 
   </script>
 
@@ -134,11 +139,11 @@
 
           @foreach($alumni as $alum)
           <tr>
-            <td> <input type="checkbox" name="alumid_{{$alum['id']}}" value="{{$alum['id']}}" id="alumid" >{{   $alum['id']}}</td>
+            <td> <input type="checkbox" name="alumid_{{$alum['id']}}" value="{{$alum['id']}}" id="alumid" onclick="enabble({{$alum['id']}});"></td>
             <td>{{$alum['name']}}</td>        
             <td>{{$alum['email']}}</td>
             <td>{{$alum['industry']}}</td>
-            <td><input type="text" name="tag_{{$alum['id']}}"></td>
+            <td><input type="text" name="tag_{{$alum['id']}}" id="{{$alum['id']}}" readonly></td>
 
           </tr>
           @endforeach
