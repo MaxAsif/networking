@@ -24,7 +24,7 @@
     } );
     function enabble(id)
     {
-      document.getElementById(id).removeAttribute('readonly');
+      document.getElementById(id).removeAttribute('disabled');
     }
   </script>
 </head>
@@ -149,13 +149,13 @@
             <td>{{$alum['name']}}</td>        
             <td>{{$alum['email']}}</td>
             <td>{{$alum['industry']}}</td>
-            <td><select name="tag" id="{{$alum['id']}}" readonly>
+            <td><select name="tag" id="{{$alum['id']}}" disabled>
               @foreach($tags as $tag)
               <option value="{{$tag['tagname']}}">{{$tag['tagname']}}</option>
               @endforeach
             </select>
           </td>
-          
+
           <!--<td><input type="text" name="tag" id="{{$alum['id']}}" readonly></td>-->
           <td><input type="submit" name="submit" value="Add"></td>
         </form>
@@ -164,8 +164,8 @@
 
     </tbody>
   </table>
-  
-  
+
+
 </div>
 
 
