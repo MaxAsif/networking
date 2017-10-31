@@ -149,15 +149,22 @@
             <td>{{$alum['name']}}</td>        
             <td>{{$alum['email']}}</td>
             <td>{{$alum['industry']}}</td>
+            <td><?php
+            $tags_a = App\Addtag::where('alum_id',$alum['id'])->pluck('tags');
+            foreach ($tags_a as $tag_a)
+            {
+              echo $tag_a.'        ';  
+            }
+            ?>
+            </td>
             <td><select name="tag" id="{{$alum['id']}}" disabled>
               @foreach($tags as $tag)
               <option value="{{$tag['tagname']}}">{{$tag['tagname']}}</option>
               @endforeach
             </select>
+            <input type="submit" name="submit" value="Add">
           </td>
 
-          <!--<td><input type="text" name="tag" id="{{$alum['id']}}" readonly></td>-->
-          <td><input type="submit" name="submit" value="Add"></td>
         </form>
       </tr>
       @endforeach
