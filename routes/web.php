@@ -28,6 +28,7 @@ Route::get('/addtag','TagslistController@index');
 
 Route::post('/addalumni','AlumniController@index');
 Route::post('/addtag','TagslistController@postdata');
+Route::post('/access','AccessController@post');
 
 
 Route::get('/access','AccessController@index');
