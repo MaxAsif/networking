@@ -26,6 +26,7 @@
   <table id="smtable" class="table table-striped">
     <thead>
       <tr>
+        <th>ID</th>
         <th>NAME</th>
         <th>EMAIL</th>
 
@@ -37,6 +38,7 @@
 
       @foreach($smembers as $member)
       <tr>
+        <td>{{$member['id']}}</td>     
         <td>{{$member['name']}}</td>        
         <td>{{$member['email']}}</td>
         
@@ -44,6 +46,36 @@
       @endforeach
     </tbody>
   </table>
+</div>
+
+<div class="container" >
+  <form method="post" action="/access">
+            {{csrf_field()}}
+
+    <select name="tag" >
+              @foreach($smembers as $tag)
+              <option value="{{$tag['name']}}">{{$tag['name']}}</option>
+              @endforeach
+            </select>
+            <br>
+
+           
+
+            @foreach($tags as $tag)
+            {{$tag['tagname']}}<br>
+             <input type="radio" name="{{$tag['id']}}" value="{{$tag['id']}}" id="tagid_{{$tag['id']}}">YES
+             <br><input type="radio" name="{{$tag['id']}}" value="0" id="tagid_{{$tag['id']}}" checked="">NO
+             <br><br>
+              @endforeach
+
+              <input type="submit" value="Submit">
+    
+      </form>
+
+
+
+
+
 </div>
 
 
