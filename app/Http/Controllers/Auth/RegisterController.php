@@ -71,7 +71,7 @@ class RegisterController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'url' => '',
-                'access' => '',
+               
                 ]);
         }
         elseif ($data['type']=='CO')
