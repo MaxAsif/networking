@@ -43,3 +43,6 @@ class TagslistController extends Controller
         return view('addtag',compact('alumni'));
     }
 }
+
+
+
