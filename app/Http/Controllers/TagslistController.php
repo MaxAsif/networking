@@ -32,4 +32,17 @@ class TagslistController extends Controller
         $alumni = Tagslist::get();
         return view('addtag',compact('alumni'));
     }
+     public function deletedata()
+    {
+
+        
+       
+       Tagslist::destroy(request('tag'));
+        
+        $alumni = Tagslist::get();
+        return view('addtag',compact('alumni'));
+    }
 }
+
+
+

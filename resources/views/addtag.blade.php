@@ -120,6 +120,23 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 </div>
 </div>
 
+<br><br><br>
+<div class="container" >
+  <h2>DELETE TAG</h2>  
+  <form method="post" action="/deletetag">
+            {{csrf_field()}}
+
+    <select name="tag" >
+              @foreach($alumni as $tag)
+              <option value="{{$tag['id']}}">{{$tag['tagname']}}</option>
+              @endforeach
+            </select>
+            <br><br><br>
+
+              <input type="submit" value="Submit">
+    
+      </form>
+
 
 
 
