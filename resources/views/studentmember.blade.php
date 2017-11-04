@@ -6,6 +6,19 @@
   {
     window.location = '/viewdata';
   }
+   function addtag()
+  {
+    window.location = '/addtag';
+  }
+   function access()
+  {
+    window.location = '/access';
+  }
+   function add()
+  {
+    window.location = '/addalumni';
+  }
+
 </script>
 
 <meta charset="UTF-8">
@@ -97,13 +110,18 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <br />
         <div class="w3-container">
           <h5 class="w3-opacity"><b>TAGS</b></h5>
-          <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary">TAGS</button></div>
+          <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary" onclick="addtag();">TAGS</button></div>
           
           <p>You can create tags,assign tags to alumni and also delete them.Click the button to do it.</p>
           <hr>
         </div>
-        <br />
-
+        
+         <br />
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>ADD ALUMNI</b></h5>
+           <div class="btn-group btn-group-lg"><button type="button" class="btn btn-primary" onclick="add();">ADD</button></div>
+          <p>You can add data of alumni of our instituion which are still not connected to us.Click the button to see it. </p><br>
+        </div>
       </div>
 
 
@@ -126,6 +144,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <i class="fa fa-linkedin w3-hover-opacity"></i>
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
+
+
 
 
 
