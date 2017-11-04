@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Alumni;
 use App\Tagslist;
+use App\User;
+use Auth;
+use App\access;
+use App\smember;
+
 class AlumniController extends Controller
 {
     public function index()
@@ -40,6 +45,23 @@ class AlumniController extends Controller
         $tags = Tagslist::get();
     
         return view('viewdata',compact('alumni','message','tags'));
+    }
+      public function get_s()
+    {
+        $user_name = Auth::user()->name;
+        
+        $student_id = smember::where('name',$user_name)->first()->id;
+        //dd($student_id);
+        $arr = access::where('stud_id',$student_id)->pluck('access');
+        //dd($acessess);
+       
+        $acessess = [];
+        foreach ($arr as $access) 
+        {
+            array_push($arr,explode(',',$access));            
+        }
+        //dd($arr);
+         return view('viewdata_s',compact('acessess'));
     }
 }
   

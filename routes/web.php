@@ -15,7 +15,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/viewdata','AlumniController@get');
-
+Route::get('/viewdata_s','AlumniController@get_s');
 
 Route::get('/addalumni',function(){
 	$message = '';

@@ -4,7 +4,7 @@
 <script type="text/javascript">
   function call()
   {
-    window.location = '/viewdata';
+    window.location = '/viewdata_s';
   }
 </script>
 
