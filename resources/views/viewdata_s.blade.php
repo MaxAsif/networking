@@ -214,9 +214,12 @@ $('#example').DataTable(
         foreach($alum_intersect as $id)
         {
           $alum = App\Alumni::find($id);
+          
+        
           echo '<tr><td>'.$alum->name.'</td>';
           echo '<td>'.$alum->email.'</td>';
           echo '<td>'.$alum->industry.'</td></tr>';
+          
 
         }
         @endphp

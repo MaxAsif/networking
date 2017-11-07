@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Alumni;
 use App\Tagslist;
+use App\User;
+use Auth;
+use App\access;
+use App\smember;
+
 session_start();
 class AlumniController extends Controller
 {
