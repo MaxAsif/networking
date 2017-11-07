@@ -24,4 +24,18 @@ class AddtagController extends Controller
     	return back()->with(compact('message','alumni','tags'));
     	
    	}
+     public function delete()
+    {
+
+        
+        $alum=Addtag::find(request('tagd'));
+  $alum->delete(); 
+
+        $alumni = Alumni::get();
+        $message = 'Tag has been added succesfully';
+        $tags = Tagslist::get();
+        return back()->with(compact('message','alumni','tags'));
+        
+        
+    }
 }
