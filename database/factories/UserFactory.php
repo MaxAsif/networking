@@ -36,7 +36,7 @@ $factory->define(App\Alumni::class, function (Faker $faker) {
         'mobile' =>$faker->e164PhoneNumber,
         'dob' =>$faker->date,
         'industry' =>$faker->company,
-
+        'year'=>$faker->year,
 
     ];
 });

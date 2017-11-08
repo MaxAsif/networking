@@ -1,32 +1,60 @@
+<html>
 <head>
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+
+  <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+  <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+</head>
+<script type="text/javascript" charset="utf-8">
+  /*$(document).ready(function() {
+
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+  } );
+  */
 
 
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  $(document).ready(function(){
+    $('#myTable1').dataTable();
+    $('#myTable2').dataTable();
+    $('#myTable3').dataTable();
+    $('#myTable4').dataTable();
 
 
+  });
+/*
+$('#example').DataTable(
+      {
+        "columns": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        { "searchable": false }
+        ]
+      });
 
+*/
 
-  <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
-  <script type="text/javascript" src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
-  <script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-      $('#example').DataTable();
-      document.getElementById("mySidenav").style.width = "250px";
-      document.getElementById("main").style.marginLeft = "250px";
-    } );
-    function enabble(id)
+  
+</script>
+<script type="text/javascript">
+  function enabble(id)
     {
+
       document.getElementById(id).removeAttribute('disabled');
+      console.log('Disabled',id);
+
     }
-  </script>
+</script>
 </head>
 <body>
   @include('layouts.navbar')
@@ -81,10 +109,9 @@
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 18px;}
     }
-    .col.sm.4
-    {
-      background-color: white;
-    }
+    
+
+    
   </style>
 
 
@@ -94,8 +121,7 @@
 
 
 
-  <div class="col-sm-3">
-
+<!--
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a href="#"><span class="glyphicon glyphicon-pencil"></span> About</a>
@@ -118,38 +144,157 @@
     }
 
   </script>
+-->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9">
 
-  <div class="col-sm-9">
-   @foreach($accesses as $access)
-    <table id="example" class="display" cellspacing="0" width="100%">
+      <ul class="nav nav-tabs">
+
+        @php
+        $i=0;
+        foreach($tags_list as $tags)
+        {
+          $name = "";
+          foreach ($tags as $tag) {
+            $name = $name.' '.$tag;
+          }
+          $i++;
+          if($i == 1)
+           echo '<li class="active"><a data-toggle="tab" href="#'.$i.'">'.$name.'</a></li>';
+         else
+          echo '<li><a data-toggle="tab" href="#'.$i.'">'.$name.'</a></li>';
+      }
+      $i=0;
+      @endphp
+
+    </ul>
+  </div>
+</div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="tab-content">
+
+       @foreach($tags_list as $tags)
+       @php
+       $name = "";
+       foreach ($tags as $tag) {
+        $name = $name.' '.$tag;
+      }
+      if($i==0)
+        echo '<div id="'.++$i.'" class="tab-pane fade in active">';
+      else
+       echo '<div id="'.++$i.'" class="tab-pane fade">';
+     @endphp
+     <table id="myTable{{$i}}"  class="table table-striped table-bordered results" cellspacing="0" width="100%">
       <thead>
         <tr>
-          
+          <th>SELECT</th>
           <th>ALUMNI</th>
           <th>EMAIL</th>
           <th>INDUSTRY</th>
+          <th>YEAR</th>
+          <th>TAGS</th>
+          <th>ADD TAG</th>
+          <th>DELETE TAG</th>
+          <th>EDIT DATA</th>
           
+
 
         </tr>
       </thead>
-      <tbody>
-      <tr>
-        
+      <tbody class="searchable">
+        @php
 
-      </tr>
 
-    </tbody>
-  </table>
+
+        $alumni_id = [];
+        foreach($tags as $tag)
+        {
+          array_push($alumni_id,(App\Addtag::where('tags',$tag)->pluck('alum_id')->toArray()));
+
+        } 
+
+        if(count($alumni_id)>1)
+        {
+          $alum_intersect = call_user_func_array('array_intersect',$alumni_id);
+        }
+        else
+        {
+          $alum_intersect = $alumni_id[0];
+        }
+
+        foreach($alum_intersect as $id)
+        {
+          $alum = App\Alumni::find($id);
+
+          echo '<tr><td><form action="/assigntag" method="POST">'.
+            csrf_field().'
+            '.$alum['id'].' <input type="checkbox" name="alumid" value='.$alum['id'].' id="alumid" onclick="enabble('.json_encode($alum['id']).');"></td>';
+          echo '<td>'.$alum->name.'</td>';
+          echo '<td>'.$alum->email.'</td>';
+          echo '<td>'.$alum->industry.'</td>';
+          echo '<td>'.$alum->year.'</td>';
+          echo '<td>';
+            $tags_a = App\Addtag::where('alum_id',$alum['id'])->pluck('tags');
+            foreach ($tags_a as $tag_a)
+            {
+              echo $tag_a.'        ';  
+            }
+           
+            echo '</td>';
+           $tags = App\Tagslist::get();
+          echo '<td><select name="tag" id='.$alum['id'].' disabled>';
+              foreach($tags as $tag)
+              {
+                echo '<option value='.$tag['tagname'].'>'.$tag['tagname'].'</option>';
+              }
+            echo '</select>
+            <input type="submit" name="submit" value="Add"></td>';
+
+
+          $tags_a = App\Addtag::where('alum_id',$alum['id'])->get();
+          echo '<td>
+              <form action="/taggone" method="POST">'.
+                csrf_field().'
+                
+                
+                
+              <select name="tagd" id='.$alum['id'].' >';
+              foreach($tags_a as $tag_a)
+              {
+             echo '<option value='.$tag_a['id'].'>'.$tag_a['tags'].'</option>';
+             }
+            echo '</select>
+            <input type="submit" name="submit" value="Delete">
+            </form>
+            </td>';
+          echo '<td><form action="/editalum" method="POST">
+              '.csrf_field().'
+               <input type="submit" name="submit" value='.$alum['id'].'>
+            </form></td>
+</tr>';
+
+
+
+          
+
+        }
+        @endphp
+
+      </tbody>
+    </table>
+  </div>
+
   @endforeach
+</div>
 
+</div>
+</div>
 </div>
 
 
-<script type="text/javascript">
-  // For demo to fit into DataTables site builder...
-  $('#example')
-  .removeClass( 'display' )
-  .addClass('table table-striped table-bordered');
-</script>
 </body>
 </html>

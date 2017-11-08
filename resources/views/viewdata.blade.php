@@ -1,24 +1,34 @@
 <head>
+<meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
-
-
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
+ <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+ <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 
 
-  <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
-  <script type="text/javascript" src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
   <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
-      $('#example').DataTable();
+     
+
+$('#example').DataTable(
+     {
+       "columns": [
+       { "searchable": false },
+       { "searchable": false },
+       null,
+       null,
+       null,
+       null,
+       { "searchable": false },
+       { "searchable": false },
+       null,
+       { "searchable": false },
+       ]
+     });
       document.getElementById("mySidenav").style.width = "250px";
       document.getElementById("main").style.marginLeft = "250px";
     } );
@@ -89,7 +99,10 @@
 
 
 
+<?php
 
+$alumni=$_SESSION["alumni"];
+?>
 
 
 
@@ -98,10 +111,11 @@
 
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="#"><span class="glyphicon glyphicon-pencil"></span> About</a>
-      <a href="#"><span class="glyphicon glyphicon-envelope"></span> Services</a>
-      <a href="#"><span class="glyphicon glyphicon-user"></span> Clients</a>
-      <a href="#"><span class="glyphicon glyphicon-print"></span> Contact</a>
+
+      <a href="/viewdata"><span class="glyphicon glyphicon-pencil"></span> All</a>
+      @for ($x = 1955; $x <= 2016; $x++) 
+        <a href="/year/{{$x}}"><span class="glyphicon glyphicon-pencil"></span> {{$x}}</a>
+        @endfor
     </div>
   </div>
 
@@ -119,6 +133,8 @@
 
   </script>
 
+   
+
   <div class="col-sm-9">
     @if($message!='')
     <div class="alert alert-success">
@@ -130,11 +146,16 @@
       <thead>
         <tr>
           <th> SELECT</th>
+          <th>ID</th>
           <th>ALUMNI</th>
-          <th>EMAIL</th>
+          <th>EMAIL <button type="button" class="btn btn-primary" id="copy_mail">COPY</button></th>
           <th>INDUSTRY</th>
           <th>TAGS</th>
+          
           <th>ADD TAG</th>
+          <th>DELETE TAG</th>
+          <th>Year</th>
+          <th>Edit Data</th>
 
         </tr>
       </thead>
@@ -146,6 +167,7 @@
           <form action="/assigntag" method="POST">
             {{csrf_field()}}
             <td> <input type="checkbox" name="alumid" value="{{$alum['id']}}" id="alumid" onclick="enabble({{$alum['id']}});"></td>
+            <td>{{$alum['id']}}</td> 
             <td>{{$alum['name']}}</td>        
             <td>{{$alum['email']}}</td>
             <td>{{$alum['industry']}}</td>
@@ -157,15 +179,42 @@
             }
             ?>
             </td>
+            
             <td><select name="tag" id="{{$alum['id']}}" disabled>
               @foreach($tags as $tag)
               <option value="{{$tag['tagname']}}">{{$tag['tagname']}}</option>
               @endforeach
             </select>
             <input type="submit" name="submit" value="Add">
-          </td>
 
-        </form>
+
+           
+          </td>
+          </form>
+           <td>
+              <form action="/taggone" method="POST">
+                {{csrf_field()}}
+                <?php
+                $tags_a = App\Addtag::where('alum_id',$alum['id'])->get();
+                ?>
+              <select name="tagd" id="{{$alum['id']}}" >
+              @foreach($tags_a as $tag_a)
+              <option value="{{$tag_a['id']}}">{{$tag_a['tags']}}</option>
+              @endforeach
+            </select>
+            <input type="submit" name="submit" value="Delete">
+            </form>
+            </td>
+
+          <td>{{$alum['year']}}</td>
+          <td>
+            <form action="/editalum" method="POST">
+              {{csrf_field()}}
+               <input type="submit" name="submit" value="{{$alum['id']}}">
+            </form>
+
+
+          </td>
       </tr>
       @endforeach
 
