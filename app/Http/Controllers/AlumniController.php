@@ -109,8 +109,10 @@ class AlumniController extends Controller
         ]);
          $alumni = Alumni::get();
         $message = '';
-        
-       return redirect('/viewdata');
+        if(Auth::user()->type == 'CO' )
+          return redirect('/viewdata');
+          else
+            return redirect('/viewdata_s');
         
     }
 

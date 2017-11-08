@@ -46,6 +46,15 @@ $('#example').DataTable(
 
   
 </script>
+<script type="text/javascript">
+  function enabble(id)
+    {
+
+      document.getElementById(id).removeAttribute('disabled');
+      console.log('Disabled',id);
+
+    }
+</script>
 </head>
 <body>
   @include('layouts.navbar')
@@ -182,10 +191,16 @@ $('#example').DataTable(
      <table id="myTable{{$i}}"  class="table table-striped table-bordered results" cellspacing="0" width="100%">
       <thead>
         <tr>
-
+          <th>SELECT</th>
           <th>ALUMNI</th>
           <th>EMAIL</th>
           <th>INDUSTRY</th>
+          <th>YEAR</th>
+          <th>TAGS</th>
+          <th>ADD TAG</th>
+          <th>DELETE TAG</th>
+          <th>EDIT DATA</th>
+          
 
 
         </tr>
@@ -214,11 +229,56 @@ $('#example').DataTable(
         foreach($alum_intersect as $id)
         {
           $alum = App\Alumni::find($id);
-          
-        
-          echo '<tr><td>'.$alum->name.'</td>';
+
+          echo '<tr><td><form action="/assigntag" method="POST">'.
+            csrf_field().'
+            '.$alum['id'].' <input type="checkbox" name="alumid" value='.$alum['id'].' id="alumid" onclick="enabble('.json_encode($alum['id']).');"></td>';
+          echo '<td>'.$alum->name.'</td>';
           echo '<td>'.$alum->email.'</td>';
-          echo '<td>'.$alum->industry.'</td></tr>';
+          echo '<td>'.$alum->industry.'</td>';
+          echo '<td>'.$alum->year.'</td>';
+          echo '<td>';
+            $tags_a = App\Addtag::where('alum_id',$alum['id'])->pluck('tags');
+            foreach ($tags_a as $tag_a)
+            {
+              echo $tag_a.'        ';  
+            }
+           
+            echo '</td>';
+           $tags = App\Tagslist::get();
+          echo '<td><select name="tag" id='.$alum['id'].' disabled>';
+              foreach($tags as $tag)
+              {
+                echo '<option value='.$tag['tagname'].'>'.$tag['tagname'].'</option>';
+              }
+            echo '</select>
+            <input type="submit" name="submit" value="Add"></td>';
+
+
+          $tags_a = App\Addtag::where('alum_id',$alum['id'])->get();
+          echo '<td>
+              <form action="/taggone" method="POST">'.
+                csrf_field().'
+                
+                
+                
+              <select name="tagd" id='.$alum['id'].' >';
+              foreach($tags_a as $tag_a)
+              {
+             echo '<option value='.$tag_a['id'].'>'.$tag_a['tags'].'</option>';
+             }
+            echo '</select>
+            <input type="submit" name="submit" value="Delete">
+            </form>
+            </td>';
+          echo '<td><form action="/editalum" method="POST">
+              '.csrf_field().'
+               <input type="submit" name="submit" value='.$alum['id'].'>
+            </form></td>
+</tr>';
+
+
+
           
 
         }

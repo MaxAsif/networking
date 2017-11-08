@@ -148,7 +148,7 @@ $alumni=$_SESSION["alumni"];
           <th> SELECT</th>
           <th>ID</th>
           <th>ALUMNI</th>
-          <th>EMAIL</th>
+          <th>EMAIL <button type="button" class="btn btn-primary" id="copy_mail">COPY</button></th>
           <th>INDUSTRY</th>
           <th>TAGS</th>
           
