@@ -17,6 +17,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/viewdata','AlumniController@get');
 Route::get('/viewdata_s','AlumniController@get_s');
 Route::get('/year/{year}','AlumniController@getyear');
+Route::post('/notesedit/{id}','AlumniController@editnotes');
 
 
 Route::get('/addalumni',function(){
@@ -31,12 +32,12 @@ Route::get('/addtag','TagslistController@index');
 Route::post('/addalumni','AlumniController@index');
 Route::post('/editalumnidata','AlumniController@editdata');
 Route::post('/editalum','AlumniController@editt');
-Route::post('/profile','AlumniController@profile');
+Route::get('/profile/{id}','AlumniController@profile');
 Route::post('/addtag','TagslistController@postdata');
 Route::post('/deletetag','TagslistController@deletedata');
 Route::post('/access','AccessController@post');
 
 
 Route::get('/access','AccessController@index');
-Route::post('/assigntag','AddtagController@index');
-Route::post('/taggone','AddtagController@delete');
+Route::post('/assigntag/{id}','AddtagController@index');
+Route::post('/taggdelete/{id}','AddtagController@delete');

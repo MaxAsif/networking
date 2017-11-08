@@ -14,20 +14,15 @@
 </head>
 <script type="text/javascript" charset="utf-8">
   /*$(document).ready(function() {
-
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
   } );
   */
-
-
   $(document).ready(function(){
     $('#myTable1').dataTable();
     $('#myTable2').dataTable();
     $('#myTable3').dataTable();
     $('#myTable4').dataTable();
-
-
   });
 /*
 $('#example').DataTable(
@@ -41,22 +36,21 @@ $('#example').DataTable(
         { "searchable": false }
         ]
       });
+      */
 
-*/
+      function copy_mail(element) {
 
-  
-</script>
-<script type="text/javascript">
-  function enabble(id)
-    {
+       var $temp = $("<input>");
+       $("body").append($temp);
+       $temp.val($(element).text()).select();
+       document.execCommand("copy");
+       $temp.remove();
+       alert("Emails have been succesfully copied!");
+     }
 
-      document.getElementById(id).removeAttribute('disabled');
-      console.log('Disabled',id);
-
-    }
-</script>
-</head>
-<body>
+   </script>
+ </head>
+ <body>
   @include('layouts.navbar')
 
   <style>
@@ -64,7 +58,6 @@ $('#example').DataTable(
       font-family: "Lato", sans-serif;
       background-color: #f5f8fa;
     }
-
     .sidenav {
       height: 100%;
       width: 0;
@@ -76,9 +69,7 @@ $('#example').DataTable(
       overflow-x: hidden;
       transition: 0.5s;
       padding-top: 60px;
-
     }
-
     .sidenav a {
       padding: 8px 8px 8px 32px;
       text-decoration: none;
@@ -87,11 +78,9 @@ $('#example').DataTable(
       display: block;
       transition: 0.3s;
     }
-
     .sidenav a:hover {
       color: #f1f1f1;
     }
-
     .sidenav .closebtn {
       position: absolute;
       top: 0;
@@ -99,18 +88,15 @@ $('#example').DataTable(
       font-size: 36px;
       margin-left: 50px;
     }
-
     #main {
       transition: margin-left .5s;
       padding: 16px;
     }
-
     @media screen and (max-height: 450px) {
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 18px;}
     }
     
-
     
   </style>
 
@@ -130,19 +116,15 @@ $('#example').DataTable(
       <a href="#"><span class="glyphicon glyphicon-print"></span> Contact</a>
     </div>
   </div>
-
-
   <script>
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
       document.getElementById("main").style.marginLeft = "250px";
     }
-
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("main").style.marginLeft= "0";
     }
-
   </script>
 -->
 <div class="container">
@@ -189,34 +171,30 @@ $('#example').DataTable(
        echo '<div id="'.++$i.'" class="tab-pane fade">';
      @endphp
      <table id="myTable{{$i}}"  class="table table-striped table-bordered results" cellspacing="0" width="100%">
+      <button type="button" class="btn btn-primary" id="copy_mail" onclick="copy_mail('.email')">COPY</button>
+      
       <thead>
         <tr>
-          <th>SELECT</th>
-          <th>ALUMNI</th>
+          <th>ID</th>
+          <th>NAME</th>
           <th>EMAIL</th>
           <th>INDUSTRY</th>
           <th>YEAR</th>
           <th>TAGS</th>
           <th>ADD TAG</th>
           <th>DELETE TAG</th>
-          <th>EDIT DATA</th>
-          
+          <th>EDIT</th>
 
 
         </tr>
       </thead>
       <tbody class="searchable">
         @php
-
-
-
         $alumni_id = [];
         foreach($tags as $tag)
         {
           array_push($alumni_id,(App\Addtag::where('tags',$tag)->pluck('alum_id')->toArray()));
-
         } 
-
         if(count($alumni_id)>1)
         {
           $alum_intersect = call_user_func_array('array_intersect',$alumni_id);
@@ -225,70 +203,61 @@ $('#example').DataTable(
         {
           $alum_intersect = $alumni_id[0];
         }
-
         foreach($alum_intersect as $id)
         {
           $alum = App\Alumni::find($id);
-
-          echo '<tr><td><form action="/assigntag" method="POST">'.
-            csrf_field().'
-            '.$alum['id'].' <input type="checkbox" name="alumid" value='.$alum['id'].' id="alumid" onclick="enabble('.json_encode($alum['id']).');"></td>';
-          echo '<td>'.$alum->name.'</td>';
-          echo '<td>'.$alum->email.'</td>';
+          
+          echo '<tr><td>'.$alum['id'].'</td>';
+          echo '<td><a href="/profile/'.$alum['id'].'">'.$alum->name.'</a></td>';
+          echo '<td class="email">'.$alum->email.'  '.'</td>';
           echo '<td>'.$alum->industry.'</td>';
           echo '<td>'.$alum->year.'</td>';
           echo '<td>';
-            $tags_a = App\Addtag::where('alum_id',$alum['id'])->pluck('tags');
-            foreach ($tags_a as $tag_a)
-            {
-              echo $tag_a.'        ';  
-            }
-           
-            echo '</td>';
-           $tags = App\Tagslist::get();
-          echo '<td><select name="tag" id='.$alum['id'].' disabled>';
-              foreach($tags as $tag)
-              {
-                echo '<option value='.$tag['tagname'].'>'.$tag['tagname'].'</option>';
-              }
-            echo '</select>
-            <input type="submit" name="submit" value="Add"></td>';
+          $tags_a = App\Addtag::where('alum_id',$alum['id'])->pluck('tags');
+          foreach ($tags_a as $tag_a)
+          {
+            echo $tag_a.'        ';  
+          }
+
+          echo '</td>';
+
+          ;
+          $tags = App\Tagslist::get();
+          echo '<td><form action="/assigntag/'.$alum['id'].'" method="post">'.csrf_field().'<select name="tag" id='.$alum['id'];
+
+          foreach($tags as $tag)
+          {
+            echo '<option value='.$tag['tagname'].'>'.$tag['tagname'].'</option>';
+          }
+          echo '</select>
+          <input type="submit" name="submit" value="Add"></form></td>';
 
 
           $tags_a = App\Addtag::where('alum_id',$alum['id'])->get();
+
           echo '<td>
-              <form action="/taggone" method="POST">'.
-                csrf_field().'
-                
-                
-                
-              <select name="tagd" id='.$alum['id'].' >';
-              foreach($tags_a as $tag_a)
-              {
+          <form action="/taggdelete/'.$alum['id'].'" method="post">'.csrf_field().'<select name="tagd" >';
+            foreach($tags_a as $tag_a)
+            {
              echo '<option value='.$tag_a['id'].'>'.$tag_a['tags'].'</option>';
-             }
-            echo '</select>
-            <input type="submit" name="submit" value="Delete">
-            </form>
-            </td>';
-          echo '<td><form action="/editalum" method="POST">
-              '.csrf_field().'
-               <input type="submit" name="submit" value='.$alum['id'].'>
-            </form></td>
-</tr>';
+           }
+           echo '</select><input type="submit" name="submit" value="Delete"></form></td>';
+
+           echo '<td><form action="/editalum" method="POST">
+           '.csrf_field().'
+           <input type="submit" name="submit" value='.$alum['id'].'>
+         </form></td>
+       </tr>';
 
 
+     }
+     @endphp
 
-          
+   </tbody>
+ </table>
+</div>
 
-        }
-        @endphp
-
-      </tbody>
-    </table>
-  </div>
-
-  @endforeach
+@endforeach
 </div>
 
 </div>

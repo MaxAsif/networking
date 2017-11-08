@@ -38,6 +38,7 @@ class AlumniController extends Controller
     		'dob' => request('dob'),
     		'industry' => request('industry'),
             'year' => request('year'),
+          'notes' =>" "
     	]);
         $message = 'Alumni has been added to databse succesfully!';
         return view('addalumni',compact('message'));
@@ -47,8 +48,7 @@ class AlumniController extends Controller
         $alumni = Alumni::get();
         $message = '';
         $tags = Tagslist::get();
-       
-
+        
     
         return view('viewdata',compact('message','tags','alumni'));
     }
@@ -57,11 +57,10 @@ class AlumniController extends Controller
         $alumni = Alumni::where('year',$year)->get();
         $message = '';
         $tags = Tagslist::get();
-         $_SESSION["alumni"] = $alumni;
-          $_SESSION["year"] = $year;
+         
 
     
-        return view('viewdata',compact('message','tags'));
+        return view('viewdata',compact('message','tags','alumni'));
     }
     public function editt()
     {
@@ -72,14 +71,13 @@ class AlumniController extends Controller
     
         return view('editdata',compact('alumni','message','tags'));
     }
-    public function profile()
+    public function profile($id)
     {
-        $alumni = Alumni::where('id',request('submit'))->get();
-        $message = '';
-        $tags = Tagslist::get();
 
-    
-        return view('profile',compact('alumni','message','tags'));
+        $alumni = Alumni::where('id',$id)->get();
+        
+      
+        return view('profile',compact('alumni'));
     }
     public function editdata()
     {
@@ -169,6 +167,20 @@ class AlumniController extends Controller
        }
      
        return view('viewdata_s',compact('tags_list'));
+   }
+   public function editnotes($id)
+   {
+            Alumni::where('id', $id)
+        ->update([
+            
+            'notes' => request('comment'),
+        ]);
+         $alumni = Alumni::where('id',$id)->get();
+        $message = '';
+        $tags = Tagslist::get();
+
+    
+        return redirect('/profile/'.$id);
    }
 }
   

@@ -37,6 +37,7 @@ $factory->define(App\Alumni::class, function (Faker $faker) {
         'dob' =>$faker->date,
         'industry' =>$faker->company,
         'year'=>$faker->year,
+        'notes'=>" ",
 
     ];
 });

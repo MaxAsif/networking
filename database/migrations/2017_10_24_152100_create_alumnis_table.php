@@ -25,7 +25,7 @@ class CreateAlumnisTable extends Migration
             $table->text('dob');
             $table->text('industry');
             $table->text('year');
-            
+            $table->text('notes');
         });
     }
 

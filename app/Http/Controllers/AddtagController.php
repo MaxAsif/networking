@@ -9,11 +9,12 @@ use App\Tagslist;
 use Auth;
 class AddtagController extends Controller
 {
-    public function index()
+    public function index($id)
     {
+
     	
     	Addtag::create([
-    			'alum_id' => request('alumid'),
+    			'alum_id' => $id,
     			
     			'tags' => request('tag'),
 
@@ -25,15 +26,15 @@ class AddtagController extends Controller
           else
             return redirect('/viewdata_s');
    	}
-     public function delete()
+     public function delete($id)  
     {
 
         
         $alum=Addtag::find(request('tagd'));
-  $alum->delete(); 
+        $alum->delete(); 
 
         $alumni = Alumni::get();
-        $message = 'Tag has been added succesfully';
+        $message = 'Tag has been deleted succesfully';
         $tags = Tagslist::get();
         return back()->with(compact('message','alumni','tags'));
         
