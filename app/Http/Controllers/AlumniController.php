@@ -47,10 +47,10 @@ class AlumniController extends Controller
         $alumni = Alumni::get();
         $message = '';
         $tags = Tagslist::get();
-        $_SESSION["alumni"] = $alumni;
+       
 
     
-        return view('viewdata',compact('message','tags'));
+        return view('viewdata',compact('message','tags','alumni'));
     }
      public function getyear($year)
     {
