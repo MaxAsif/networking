@@ -132,7 +132,7 @@ class AlumniController extends Controller
        $student_id = smember::where('name',$user_name)->first()->id;
        //dd($student_id);
        $arr = access::where('stud_id',$student_id)->pluck('access');
-       //dd($acessess);
+       
 
        $accesses = [];
        foreach ($arr as $access)
@@ -142,6 +142,7 @@ class AlumniController extends Controller
        //dd($arr);
 
        $tags_list = [];
+       
        foreach ($accesses as $access )
        {
             array_pop($access);
@@ -150,7 +151,7 @@ class AlumniController extends Controller
             foreach($access as $a )
             {
 
-               if($tag = Tagslist::find($a))
+               if((Tagslist::find($a))!=null)
                {
                  $tag = Tagslist::find($a)->tagname;
                  array_push($tags, $tag);
@@ -162,9 +163,11 @@ class AlumniController extends Controller
                }
                
              }
+             if(!empty($tags))
               array_push($tags_list, $tags);
 
        }
+       //dd($tags_list);
      
        return view('viewdata_s',compact('tags_list'));
    }
