@@ -26,7 +26,7 @@ $('#example').DataTable(
        { "searchable": false },
        { "searchable": false },
        null,
-       { "searchable": false },
+       { "searchable": false },null,
        ]
      });
       document.getElementById("mySidenav").style.width = "250px";
@@ -156,6 +156,7 @@ $alumni=$_SESSION["alumni"];
           <th>DELETE TAG</th>
           <th>Year</th>
           <th>Edit Data</th>
+          <th>Profile</th>
 
         </tr>
       </thead>
@@ -209,6 +210,14 @@ $alumni=$_SESSION["alumni"];
           <td>{{$alum['year']}}</td>
           <td>
             <form action="/editalum" method="POST">
+              {{csrf_field()}}
+               <input type="submit" name="submit" value="{{$alum['id']}}">
+            </form>
+
+
+          </td>
+          <td>
+            <form action="/profile" method="POST">
               {{csrf_field()}}
                <input type="submit" name="submit" value="{{$alum['id']}}">
             </form>
