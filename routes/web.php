@@ -31,6 +31,7 @@ Route::get('/addtag','TagslistController@index');
 Route::post('/addalumni','AlumniController@index');
 Route::post('/editalumnidata','AlumniController@editdata');
 Route::post('/editalum','AlumniController@editt');
+Route::post('/profile','AlumniController@profile');
 Route::post('/addtag','TagslistController@postdata');
 Route::post('/deletetag','TagslistController@deletedata');
 Route::post('/access','AccessController@post');

@@ -72,6 +72,15 @@ class AlumniController extends Controller
     
         return view('editdata',compact('alumni','message','tags'));
     }
+    public function profile()
+    {
+        $alumni = Alumni::where('id',request('submit'))->get();
+        $message = '';
+        $tags = Tagslist::get();
+
+    
+        return view('profile',compact('alumni','message','tags'));
+    }
     public function editdata()
     {
  
