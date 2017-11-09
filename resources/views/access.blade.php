@@ -68,7 +68,18 @@
              <input type="radio" name="{{$tag['id']}}" value="{{$tag['id']}}" id="tagid_{{$tag['id']}}">YES
              <input type="radio" name="{{$tag['id']}}" value="0" id="tagid_{{$tag['id']}}" checked="">NO
              <br>
+
+            
               @endforeach
+              <br>
+               <select name="year">
+               <option value="0">Select the year</option>
+               @for($year=1955;$year<=2016;$year++)
+                
+                  <option value="{{$year}}">{{$year}}</option>
+
+               @endfor
+               <select name="year">
 
               <input type="submit" value="Submit">
     

@@ -193,7 +193,14 @@ $('#example').DataTable(
         $alumni_id = [];
         foreach($tags as $tag)
         {
+          if(is_numeric($tag))
+          {
+            array_push($alumni_id,(App\Alumni::where('year',$tag)->pluck('id')->toArray()));
+          }
+          else
+          {
           array_push($alumni_id,(App\Addtag::where('tags',$tag)->pluck('alum_id')->toArray()));
+          }
         } 
         if(count($alumni_id)>1)
         {

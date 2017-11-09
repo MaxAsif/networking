@@ -13,75 +13,75 @@ use App\smember;
 session_start();
 class AlumniController extends Controller
 {
-    public function index()
-    {
-        $this->validate(request(),[
-            'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'country' => 'required',
-            'mobile' => 'required',
-            
-            'dob' => 'required',
-            'industry' => 'required',
-            'year' => 'required',
-        ]);
-    	Alumni::create([
-    		'name' => request('name'),
-    		'email' => request('email'),
-    		'address' => request('address'),
-    		'city' => request('city'),
-    		'country' => request('country'),
-    		'mobile' => request('mobile'),
-            
-    		'dob' => request('dob'),
-    		'industry' => request('industry'),
-            'year' => request('year'),
-          'notes' =>" "
-    	]);
-        $message = 'Alumni has been added to databse succesfully!';
-        return view('addalumni',compact('message'));
-    }
-    public function get()
-    {
-        $alumni = Alumni::get();
-        $message = '';
-        $tags = Tagslist::get();
-        
-    
-        return view('viewdata',compact('message','tags','alumni'));
-    }
-     public function getyear($year)
-    {
-        $alumni = Alumni::where('year',$year)->get();
-        $message = '';
-        $tags = Tagslist::get();
-         
+  public function index()
+  {
+    $this->validate(request(),[
+      'name' => 'required',
+      'email' => 'required',
+      'address' => 'required',
+      'city' => 'required',
+      'country' => 'required',
+      'mobile' => 'required',
+
+      'dob' => 'required',
+      'industry' => 'required',
+      'year' => 'required',
+      ]);
+    Alumni::create([
+      'name' => request('name'),
+      'email' => request('email'),
+      'address' => request('address'),
+      'city' => request('city'),
+      'country' => request('country'),
+      'mobile' => request('mobile'),
+
+      'dob' => request('dob'),
+      'industry' => request('industry'),
+      'year' => request('year'),
+      'notes' =>" "
+      ]);
+    $message = 'Alumni has been added to databse succesfully!';
+    return view('addalumni',compact('message'));
+  }
+  public function get()
+  {
+    $alumni = Alumni::get();
+    $message = '';
+    $tags = Tagslist::get();
 
     
-        return view('viewdata',compact('message','tags','alumni'));
-    }
-    public function editt()
-    {
-        $alumni = Alumni::where('id',request('submit'))->get();
-        $message = '';
-        $tags = Tagslist::get();
+    return view('viewdata',compact('message','tags','alumni'));
+  }
+  public function getyear($year)
+  {
+    $alumni = Alumni::where('year',$year)->get();
+    $message = '';
+    $tags = Tagslist::get();
+
 
     
-        return view('editdata',compact('alumni','message','tags'));
-    }
-    public function profile($id)
-    {
+    return view('viewdata',compact('message','tags','alumni'));
+  }
+  public function editt()
+  {
+    $alumni = Alumni::where('id',request('submit'))->get();
+    $message = '';
+    $tags = Tagslist::get();
 
-        $alumni = Alumni::where('id',$id)->get();
-        
-      
-        return view('profile',compact('alumni'));
-    }
-    public function editdata()
-    {
- 
+    
+    return view('editdata',compact('alumni','message','tags'));
+  }
+  public function profile($id)
+  {
+
+    $alumni = Alumni::where('id',$id)->get();
+
+
+    return view('profile',compact('alumni'));
+  }
+  public function editdata()
+  {
+
 /*
  $alum=Alumni::find(request('id'));
   $alum->delete();      
@@ -98,92 +98,98 @@ class AlumniController extends Controller
             'dob' => 'required',
             'industry' => 'required',
             'year' => 'required',
-        ]);*/
-        $tags = Tagslist::get();
-        Alumni::where('id', request('id'))
-        ->update([
-            'id'=>request('id'),
-            'name' => request('name'),
-            'email' => request('email'),
-            'address' => request('address'),
-            'city' => request('city'),
-            'country' => request('country'),
-            'mobile' => request('mobile'),
-            
-            'dob' => request('dob'),
-            'industry' => request('industry'),
-            'year' => request('year'),
-        ]);
-         $alumni = Alumni::get();
-        $message = '';
-        if(Auth::user()->type == 'CO' )
-          return redirect('/viewdata');
-          else
-            return redirect('/viewdata_s');
-        
-    }
+            ]);*/
+            $tags = Tagslist::get();
+            Alumni::where('id', request('id'))
+            ->update([
+              'id'=>request('id'),
+              'name' => request('name'),
+              'email' => request('email'),
+              'address' => request('address'),
+              'city' => request('city'),
+              'country' => request('country'),
+              'mobile' => request('mobile'),
+
+              'dob' => request('dob'),
+              'industry' => request('industry'),
+              'year' => request('year'),
+              ]);
+            $alumni = Alumni::get();
+            $message = '';
+            if(Auth::user()->type == 'CO' )
+              return redirect('/viewdata');
+            else
+              return redirect('/viewdata_s');
+
+          }
 
 
 
-    public function get_s()
-   {
-       $user_name = Auth::user()->name;
-       
-       $student_id = smember::where('name',$user_name)->first()->id;
+          public function get_s()
+          {
+           $user_name = Auth::user()->name;
+
+           $student_id = smember::where('name',$user_name)->first()->id;
        //dd($student_id);
-       $arr = access::where('stud_id',$student_id)->pluck('access');
-       
+           $arr = access::where('stud_id',$student_id)->pluck('access');
 
-       $accesses = [];
-       foreach ($arr as $access)
-       {
-           array_push($accesses,explode(',',$access));            
-       }
-       //dd($arr);
 
-       $tags_list = [];
-       
-       foreach ($accesses as $access )
-       {
+           $accesses = [];
+           foreach ($arr as $access)
+           {
+             array_push($accesses,explode(',',$access));            
+           }
+          // dd($accesses);
+
+           $tags_list = [];
+
+           foreach ($accesses as $access )
+           {
             array_pop($access);
             $tags = [];
 
             foreach($access as $a )
             {
-
+              if($a <= 1955)
+              {
                if((Tagslist::find($a))!=null)
                {
                  $tag = Tagslist::find($a)->tagname;
                  array_push($tags, $tag);
                }
                else
-                {
-                    $tags = [];
-                   break;
-               }
-               
-             }
-             if(!empty($tags))
-              array_push($tags_list, $tags);
+               {
+                $tags = [];
+                break;
+              }
+            }
+            else
+            {
+              array_push($tags, $a);
+            }
 
-       }
-       //dd($tags_list);
-     
-       return view('viewdata_s',compact('tags_list'));
-   }
-   public function editnotes($id)
-   {
-            Alumni::where('id', $id)
-        ->update([
-            
-            'notes' => request('comment'),
+          }
+          if(!empty($tags))
+            array_push($tags_list, $tags);
+        
+      }
+      // dd($tags_list);
+
+      return view('viewdata_s',compact('tags_list'));
+    }
+    public function editnotes($id)
+    {
+      Alumni::where('id', $id)
+      ->update([
+
+        'notes' => request('comment'),
         ]);
-         $alumni = Alumni::where('id',$id)->get();
-        $message = '';
-        $tags = Tagslist::get();
+      $alumni = Alumni::where('id',$id)->get();
+      $message = '';
+      $tags = Tagslist::get();
 
-    
-        return redirect('/profile/'.$id);
-   }
-}
+
+      return redirect('/profile/'.$id);
+    }
+  }
   

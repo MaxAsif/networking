@@ -30,9 +30,11 @@ class AccessController extends Controller
 
     	 	if(request($tag['id']) != 0)
     	 		$access=$access . request($tag['id']) . ',';
+            
 
     	 }
-    	 
+    	 if(request('year')!=0)
+            $access = $access . request('year'). ',';
 
     	  foreach($smembers as $sm)
     	 {
@@ -41,7 +43,7 @@ class AccessController extends Controller
     	 }
 
 
-    	 access::create([
+     	 access::create([
     		
     		'stud_id' =>$id,
     		'name' => request('tag'),
