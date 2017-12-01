@@ -4,5 +4,5 @@
 1. composer intstall
 2. composer dump-autoload
 3. php artisan key:generate
-4. php artisan migrate 
+4. php artisan migrate  
 5. php artisan serve
