@@ -12,8 +12,21 @@
 */
 
 Auth::routes();
+/*
+	Home Controller is used to get the dashboard of both student member and coordinator
+*/
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+/*
+	Alumni Controller is used to get the list of alumni for both student member and coordinator
+	Alumni Controller is used to get the profile of each alum
+	Alumni Controller is used to edit notes related to alum
+	Alumni Controller is used to add alum in database
+	Alumni Controller is used to edit alum
+
+*/
 Route::get('/viewdata','AlumniController@get');
 Route::get('/viewdata_s','AlumniController@get_s');
 Route::get('/year/{year}','AlumniController@getyear');
@@ -22,14 +35,33 @@ Route::get('/addalumni',function(){
 	$message = '';
 	return view('addalumni',compact('message'));
 });
-Route::get('/addtag','TagslistController@index');
 Route::post('/addalumni','AlumniController@index');
 Route::post('/editalumnidata','AlumniController@editdata');
 Route::post('/editalum','AlumniController@editt');
 Route::get('/profile/{id}','AlumniController@profile');
+
+
+/*
+	Tagslist Controller is used to add and delete tag to tags list
+
+*/
+
+Route::get('/addtag','TagslistController@index');
 Route::post('/addtag','TagslistController@postdata');
 Route::post('/deletetag','TagslistController@deletedata');
+
+/*
+	Acess Controller is used to give acess to students and view sttuden member dashboard
+
+*/
+
 Route::post('/access','AccessController@post');
 Route::get('/access','AccessController@index');
+
+/*
+	Assigntag controller is used to assign tag to the alum and delete it
+
+*/
+
 Route::post('/assigntag/{id}','AddtagController@index');
 Route::post('/taggdelete/{id}','AddtagController@delete');

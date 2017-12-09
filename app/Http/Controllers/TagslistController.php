@@ -33,12 +33,8 @@ class TagslistController extends Controller
         return view('addtag',compact('alumni'));
     }
      public function deletedata()
-    {
-
-        
-       
-       Tagslist::destroy(request('tag'));
-        
+    {  
+       Tagslist::destroy(request('tag')); 
         $alumni = Tagslist::get();
         return view('addtag',compact('alumni'));
     }
