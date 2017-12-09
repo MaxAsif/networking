@@ -26,7 +26,7 @@ class AlumniController extends Controller
       'dob' => 'required',
       'industry' => 'required',
       'year' => 'required',
-      ]);
+    ]);
     Alumni::create([
       'name' => request('name'),
       'email' => request('email'),
@@ -39,7 +39,7 @@ class AlumniController extends Controller
       'industry' => request('industry'),
       'year' => request('year'),
       'notes' =>" "
-      ]);
+    ]);
     $message = 'Alumni has been added to databse succesfully!';
     return view('addalumni',compact('message'));
   }
@@ -98,28 +98,28 @@ class AlumniController extends Controller
             'dob' => 'required',
             'industry' => 'required',
             'year' => 'required',
-            ]);*/
-            $tags = Tagslist::get();
-            Alumni::where('id', request('id'))
-            ->update([
-              'id'=>request('id'),
-              'name' => request('name'),
-              'email' => request('email'),
-              'address' => request('address'),
-              'city' => request('city'),
-              'country' => request('country'),
-              'mobile' => request('mobile'),
+          ]);*/
+          $tags = Tagslist::get();
+          Alumni::where('id', request('id'))
+          ->update([
+            'id'=>request('id'),
+            'name' => request('name'),
+            'email' => request('email'),
+            'address' => request('address'),
+            'city' => request('city'),
+            'country' => request('country'),
+            'mobile' => request('mobile'),
 
-              'dob' => request('dob'),
-              'industry' => request('industry'),
-              'year' => request('year'),
-              ]);
-            $alumni = Alumni::get();
-            $message = '';
-            if(Auth::user()->type == 'CO' )
-              return redirect('/viewdata');
+            'dob' => request('dob'),
+            'industry' => request('industry'),
+            'year' => request('year'),
+          ]);
+          $alumni = Alumni::get();
+          $message = '';
+          if(Auth::user()->type == 'CO' )
+            return redirect('/viewdata')->with('message','Profile of alum updated!');
             else
-              return redirect('/viewdata_s');
+              return redirect('/viewdata_s')->with('message','Profile of alum updated!');
 
           }
 
@@ -153,43 +153,42 @@ class AlumniController extends Controller
               if($a <= 1955)
               {
                if((Tagslist::find($a))!=null)
-               {
-                 $tag = Tagslist::find($a)->tagname;
-                 array_push($tags, $tag);
-               }
-               else
-               {
-                $tags = [];
-                break;
+                 {
+                   $tag = Tagslist::find($a)->tagname;
+                   array_push($tags, $tag);
+                 }
+                 else
+                 {
+                  $tags = [];
+                  break;
+                }
               }
+              else
+              {
+                array_push($tags, $a);
+              }
+
             }
-            else
-            {
-              array_push($tags, $a);
-            }
+            if(!empty($tags))
+              array_push($tags_list, $tags);
 
           }
-          if(!empty($tags))
-            array_push($tags_list, $tags);
-        
-      }
       // dd($tags_list);
 
-      return view('viewdata_s',compact('tags_list'));
-    }
-    public function editnotes($id)
-    {
-      Alumni::where('id', $id)
-      ->update([
+          return view('viewdata_s',compact('tags_list'));
+        }
+        public function editnotes($id)
+        {
+          Alumni::where('id', $id)
+          ->update([
 
-        'notes' => request('comment'),
-        ]);
-      $alumni = Alumni::where('id',$id)->get();
-      $message = '';
-      $tags = Tagslist::get();
+            'notes' => request('comment'),
+          ]);
+          $alumni = Alumni::where('id',$id)->get();
+          $message = '';
+          $tags = Tagslist::get();
 
 
-      return redirect('/profile/'.$id);
-    }
-  }
-  
+          return redirect('/profile/'.$id)->with('message','Notes updated!!');
+        }
+      }

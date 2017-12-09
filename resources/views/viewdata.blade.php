@@ -49,99 +49,89 @@
 
   
   
-  <div class="col-sm-9">
+  <div class="container">
     @if($message!='')
     <div class="alert alert-success">
       <strong>Message :</strong>{{$message }}
     </div>
     <br>
     @endif
+    @if (session('message'))
+    <div class="alert alert-success">
+      <strong>Message : {{ session('message') }}</strong>
+    </div>
+    @endif
+    To <strong>copy</strong> all the emails in the page : <button type="button" class="btn btn-primary" id="copy_mail" onclick="copy_mail('.email')">COPY</button>
+    <br>
     <table id="example" class="display" cellspacing="0" width="100%">
       <thead>
-       <button type="button" class="btn btn-primary" id="copy_mail" onclick="copy_mail('.email')">COPY</button>
-
        <tr>
-
         <th>ID</th>
         <th>ALUMNI</th>
         <th>EMAIL</th>
         <th>INDUSTRY</th>
         <th>TAGS</th>
-
         <th>ADD TAG</th>
         <th>DELETE TAG</th>
         <th>Year</th>
         <th>Edit Data</th>
-
-
       </tr>
     </thead>
     <tbody>
-
       @foreach($alumni as $alum)
       <tr>
-
-
         <td>{{$alum['id']}}</td> 
         <td><a href="/profile/{{$alum['id']}}">{{$alum['name']}}</a></td>        
         <td class="email">{{$alum['email'].' '}}</td>
         <td>{{$alum['industry']}}</td>
         <td><?php
-          $tags_a = App\Addtag::where('alum_id',$alum['id'])->pluck('tags');
-          foreach ($tags_a as $tag_a)
-          {
-            echo $tag_a.'        ';  
-          }
-          ?>
-        </td>
+        $tags_a = App\Addtag::where('alum_id',$alum['id'])->pluck('tags');
+        foreach ($tags_a as $tag_a)
+        {
+          echo $tag_a.'        ';  
+        }
+        ?>
+      </td>
 
-        <td>
-          <form action="/assigntag/{{$alum['id']}}" method="post">
-            {{csrf_field()}}
-            <select name="tag" id="{{$alum['id']}}">
-
-              @foreach($tags as $tag)
-              <option value="{{$tag['tagname']}}">{{$tag['tagname']}}</option>
-              @endforeach
-            </select>
-            <input type="submit" name="submit" value="Add">
-
-
-
-          </td>
+      <td>
+        <form action="/assigntag/{{$alum['id']}}" method="post">
+          {{csrf_field()}}
+          <select name="tag" id="{{$alum['id']}}">
+            @foreach($tags as $tag)
+            <option value="{{$tag['tagname']}}">{{$tag['tagname']}}</option>
+            @endforeach
+          </select>
+          <input type="submit" name="submit" value="Add">
         </form>
-        <td>
+      </td>
+
+      <td>
         <form action="/taggdelete/{{$alum['id']}}" method="POST">
-            {{csrf_field()}}
-            <?php
-            $tags_a = App\Addtag::where('alum_id',$alum['id'])->get();
-            ?>
-            <select name="tagd" id="{{$alum['id']}}" >
-              @foreach($tags_a as $tag_a)
-              <option value="{{$tag_a['id']}}">{{$tag_a['tags']}}</option>
-              @endforeach
-            </select>
-            <input type="submit" name="submit" value="Delete">
-          </form>
-        </td>
+          {{csrf_field()}}
+          <?php
+          $tags_a = App\Addtag::where('alum_id',$alum['id'])->get();
+          ?>
+          <select name="tagd" id="{{$alum['id']}}" >
+            @foreach($tags_a as $tag_a)
+            <option value="{{$tag_a['id']}}">{{$tag_a['tags']}}</option>
+            @endforeach
+          </select>
+          <input type="submit" name="submit" value="Delete">
+        </form>
+      </td>
 
-        <td>{{$alum['year']}}</td>
-        <td>
-          <form action="/editalum" method="POST">
-            {{csrf_field()}}
-            <input type="submit" name="submit" value="{{$alum['id']}}">
-          </form>
+      <td>{{$alum['year']}}</td>
+      <td>
+        <form action="/editalum" method="POST">
+          {{csrf_field()}}
+          <input type="submit" name="submit" value="{{$alum['id']}}">
+        </form>
+      </td>
 
-
-        </td>
-
-      </tr>
-      @endforeach
-
-    </tbody>
-  </table>
-
-
+    </tr>
+    @endforeach
+  </tbody>
+</table>
 </div>
 
 

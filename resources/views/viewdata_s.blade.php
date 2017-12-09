@@ -128,6 +128,12 @@ $('#example').DataTable(
   </script>
 -->
 <div class="container">
+  
+    @if (session('message'))
+    <div class="alert alert-success">
+      <strong>Message : {{ session('message') }}</strong>
+    </div>
+    @endif
   <div class="row">
     <div class="col-sm-9">
 
