@@ -23,13 +23,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        if(Auth::user()->type == 'SM')
-            return view('studentmember');
-        elseif(Auth::user()->type == 'CO')
-            return view('coordinator');
+        if(Auth::user()->confirmation == 0)
+            {
+                return redirect('/logout')->with('message','Your account has not been activated by Admin ');
+            }
         else
-            return view('auth.login');
+        {   
+            if(Auth::user()->type == 'SM')
+                return view('studentmember');
+            elseif(Auth::user()->type == 'CO')
+                return view('coordinator');
+            else
+                return view('auth.login');
+         }
     }
     
 }

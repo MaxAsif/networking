@@ -62,9 +62,10 @@ class AlumniController extends Controller
     
     return view('viewdata',compact('message','tags','alumni'));
   }
-  public function editt()
+  public function editt($id)
   {
-    $alumni = Alumni::where('id',request('submit'))->get();
+    
+    $alumni = Alumni::where('id',$id)->get();
     $message = '';
     $tags = Tagslist::get();
 
@@ -173,7 +174,7 @@ class AlumniController extends Controller
               array_push($tags_list, $tags);
 
           }
-      // dd($tags_list);
+         // dd($tags_list);
 
           return view('viewdata_s',compact('tags_list'));
         }

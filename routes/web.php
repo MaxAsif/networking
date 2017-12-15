@@ -17,6 +17,7 @@ Auth::routes();
 */
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 
 /*
@@ -37,7 +38,8 @@ Route::get('/addalumni',function(){
 });
 Route::post('/addalumni','AlumniController@index');
 Route::post('/editalumnidata','AlumniController@editdata');
-Route::post('/editalum','AlumniController@editt');
+
+Route::get('/editalum/{id}','AlumniController@editt');
 Route::get('/profile/{id}','AlumniController@profile');
 
 
@@ -51,12 +53,13 @@ Route::post('/addtag','TagslistController@postdata');
 Route::post('/deletetag','TagslistController@deletedata');
 
 /*
-	Acess Controller is used to give acess to students and view sttuden member dashboard
+	Acess Controller is used to give acess to students and view student member dashboard
 
 */
 
 Route::post('/access','AccessController@post');
 Route::get('/access','AccessController@index');
+Route::post('/accessdelete','AccessController@deleteAccess');
 
 /*
 	Assigntag controller is used to assign tag to the alum and delete it

@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Networking</title>
-
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <!-- Styles -->
  
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

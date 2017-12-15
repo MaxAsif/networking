@@ -11,52 +11,29 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 </style>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
-  <div class="w3-container">
-    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
-      <i class="fa fa-remove"></i>
-    </a>
-    <br><br>
-    <h4><b>PORTFOLIO</b></h4>
-    <p class="w3-text-grey">Click on the link below to get data</p>
-  </div>
-  <div class="w3-bar-block">
-    <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>ALUMNI</a> 
-    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>COORDINATORS</a> 
-    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>STUDENT_MEMBERS</a>
-  </div>
- <!-- <div class="w3-panel w3-large">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-  </div>
--->
-</nav>
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px">
-
- 
 <div class="container">
-  <h2>ALUMNI DETAILS</h2>    
+  <h2>TAGS LIST</h2>    
+   @if (session('message'))
+  <div class="alert alert-success">
+    <strong>Message : {{ session('message') }}</strong>
+  </div>
+  @endif
+  @if (session('Error'))
+  <div class="alert alert-danger">
+    <strong>Error : {{ session('Error') }}</strong>
+  </div>
+  @endif
   <table class="table table-striped">
     <thead>
       <tr>
         <th>ID</th>
         <th>TAGNAME</th>
-                
+
 
       </tr>
     </thead>
     <tbody>
-      
+
       @foreach($alumni as $alum)
       <tr>
         <td>{{$alum['id']}}</td>        
@@ -69,142 +46,83 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </tbody>
   </table>
 </div>
-
-
-<hr /><br /><br />
+<br /><br />
 
 
 
 
 <div class="container">
-  <h2>CREATE NEW TAG</h2>  
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Create</div>
+  <h2>CREATE NEW TAG</h2> 
 
-                <div class="panel-body">
-
-                    <form class="form-horizontal" method="POST" action="\addtag">
-                        {{ csrf_field() }}
-
-
-                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Tag Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                    <div class="form-group">
-                        <div class="col-md-8 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
-                                Create
-                            </button>
-
-                            
-                        </div>
-                    </div>
-                </form>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Create</div>
+        <div class="panel-body">
+          <form class="form-horizontal" method="POST" action="\addtag">
+            {{ csrf_field() }}
+            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+              <label for="name" class="col-md-4 control-label">Tag Name</label>
+              <div class="col-md-6">
+                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                @if ($errors->has('name'))
+                <span class="help-block">
+                  <strong>{{ $errors->first('name') }}</strong>
+                </span>
+                @endif
+              </div>
             </div>
+            <div class="form-group">
+              <div class="col-md-8 col-md-offset-4">
+                <button type="submit" class="btn btn-primary">
+                  Create
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-    </div>
-</div>
-</div>
-
-<br><br><br>
-<div class="container" >
-  <h2>DELETE TAG</h2>  
-  <form method="post" action="/deletetag">
-            {{csrf_field()}}
-
-    <select name="tag" >
-              @foreach($alumni as $tag)
-              <option value="{{$tag['id']}}">{{$tag['tagname']}}</option>
-              @endforeach
-            </select>
-            <br><br><br>
-
-              <input type="submit" value="Submit">
-    
-      </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- Pagination -->
-  <div class="w3-center w3-padding-32">
-    <div class="w3-bar">
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+      </div>
     </div>
   </div>
-
-  <!-- Images of Me -->
- 
-  
-  <!-- Contact Section -->
-
-<!-- End page content -->
 </div>
 
-<script>
-// Script to open and close sidebar
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
- 
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
-</script>
+<div class="container">
+  <h2>DELETE TAG</h2>  
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Create
+        </div>
+
+        <div class="panel-body">
+
+          <form class="form-horizontal" method="POST" action="/deletetag">
+            {{ csrf_field() }}  
+            <div class="form-group">        
+              <label for="name" class="col-md-4 control-label">Tag List</label>
+              <div class="col-md-6">
+                <select name="tag" id="tag" class="form-control">
+                 @foreach($alumni as $tag)
+                 <option value="{{$tag['id']}}">{{$tag['tagname']}}</option>
+                 @endforeach
+               </select>
+             </div>
+           </div>
+
+           <div class="form-group">
+            <div class="col-md-8 col-md-offset-4">
+              <button type="submit" class="btn btn-primary">
+                Delete
+              </button>               
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
 
 @endsection

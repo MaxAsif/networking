@@ -19,13 +19,7 @@ class CreateSmembersTable extends Migration
             $table->text('email');
             $table->text('name');
             $table->text('url');
-           
-           
-        
-
-
-
-        });
+          });
     }
 
     /**

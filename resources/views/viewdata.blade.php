@@ -2,6 +2,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -14,35 +16,35 @@
     $(document).ready(function() {
 
 
-      $('#example').DataTable(
-      {
-       "columns": [
-       
-       { "searchable": false },
-       null,
-       null,
-       null,
-       null,
-       { "searchable": false },
-       { "searchable": false },
-       null,
-       { "searchable": false },
-       ]
-     });
-      document.getElementById("mySidenav").style.width = "250px";
-      document.getElementById("main").style.marginLeft = "250px";
-    } );
-    
-    function copy_mail(element) {
+    $('#example').DataTable(
+    {
+     "columns": [
 
-     var $temp = $("<input>");
-     $("body").append($temp);
-     $temp.val($(element).text()).select();
-     document.execCommand("copy");
-     $temp.remove();
-     alert("Emails have been succesfully copied!");
-   }
- </script>
+     { "searchable": false },
+     null,
+     null,
+     null,
+     null,
+     { "searchable": false },
+     { "searchable": false },
+     null,
+     { "searchable": false },
+     ]
+   });
+   document.getElementById("mySidenav").style.width = "250px";
+   document.getElementById("main").style.marginLeft = "250px";
+ } );
+
+ function copy_mail(element) {
+
+ var $temp = $("<input>");
+ $("body").append($temp);
+ $temp.val($(element).text()).select();
+ document.execCommand("copy");
+ $temp.remove();
+ alert("Emails have been succesfully copied!");
+}
+</script>
 </head>
 <body>
   @include('layouts.navbar')
@@ -61,6 +63,11 @@
       <strong>Message : {{ session('message') }}</strong>
     </div>
     @endif
+    @if (session('Error'))
+  <div class="alert alert-danger">
+    <strong>Error : {{ session('Error') }}</strong>
+  </div>
+  @endif
     To <strong>copy</strong> all the emails in the page : <button type="button" class="btn btn-primary" id="copy_mail" onclick="copy_mail('.email')">COPY</button>
     <br>
     <table id="example" class="display" cellspacing="0" width="100%">
@@ -71,7 +78,7 @@
         <th>EMAIL</th>
         <th>INDUSTRY</th>
         <th>TAGS</th>
-        <th>ADD TAG</th>
+        <th>ADD TAG TO ALUM</th>
         <th>DELETE TAG</th>
         <th>Year</th>
         <th>Edit Data</th>
@@ -96,41 +103,50 @@
       <td>
         <form action="/assigntag/{{$alum['id']}}" method="post">
           {{csrf_field()}}
-          <select name="tag" id="{{$alum['id']}}">
+          <select name="tag" id="{{$alum['id']}}" class="form-control">
             @foreach($tags as $tag)
             <option value="{{$tag['tagname']}}">{{$tag['tagname']}}</option>
             @endforeach
           </select>
-          <input type="submit" name="submit" value="Add">
-        </form>
-      </td>
+          
+           <div class="form-group"> 
+          <button type="submit" style="background:none; border:none;">
+           <span class="glyphicon glyphicon-plus"></span>
+         </button>
+         </div>
+       </form>
+     </td>
 
-      <td>
-        <form action="/taggdelete/{{$alum['id']}}" method="POST">
-          {{csrf_field()}}
-          <?php
-          $tags_a = App\Addtag::where('alum_id',$alum['id'])->get();
-          ?>
-          <select name="tagd" id="{{$alum['id']}}" >
-            @foreach($tags_a as $tag_a)
-            <option value="{{$tag_a['id']}}">{{$tag_a['tags']}}</option>
-            @endforeach
-          </select>
-          <input type="submit" name="submit" value="Delete">
-        </form>
-      </td>
+     <td>
+      <form action="/taggdelete/{{$alum['id']}}" method="POST">
+        {{csrf_field()}}
+        <?php
+        $tags_a = App\Addtag::where('alum_id',$alum['id'])->get();
+        ?>
+        <select name="tagd" id="{{$alum['id']}}" class="form-control">
+          @foreach($tags_a as $tag_a)
+          <option value="{{$tag_a['id']}}">{{$tag_a['tags']}}</option>
+          @endforeach
+        </select>
+        @if(sizeof($tags_a)>0)
+        <button type="submit" style="background:none; border:none;">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
+        @endif
+      </form>
+    </td>
 
-      <td>{{$alum['year']}}</td>
-      <td>
-        <form action="/editalum" method="POST">
-          {{csrf_field()}}
-          <input type="submit" name="submit" value="{{$alum['id']}}">
-        </form>
-      </td>
+    <td>{{$alum['year']}}</td>
+    <td>  
+      <a href="/editalum/{{$alum['id']}}">
+        <span class="glyphicon glyphicon-edit"></span>
+      </a>
 
-    </tr>
-    @endforeach
-  </tbody>
+    </td>
+
+  </tr>
+  @endforeach
+</tbody>
 </table>
 </div>
 
