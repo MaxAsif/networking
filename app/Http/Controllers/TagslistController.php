@@ -43,7 +43,9 @@ class TagslistController extends Controller
     public function deletedata()
     {  
         //dd(request('tag'));
-        
+        $name_tag = Tagslist::find(request('tag'))->tagname;
+        $alum_id_list = Addtag::where('tags',$name_tag)->get()->pluck('id')->toArray();
+        Addtag::destroy($alum_id_list);
         Tagslist::destroy(request('tag')); 
         $alumni = Tagslist::get();
 

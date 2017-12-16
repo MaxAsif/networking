@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'type' => 'required',
+            'contact' => 'required|min:10'
             ]);
     }
 
@@ -82,12 +83,14 @@ class RegisterController extends Controller
                 'url' => '',
                 ]);
         }
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'type' => $data['type'],
             'confirmation' => 0,
+            'contact' => $data['contact']
             ]);
     }
 }

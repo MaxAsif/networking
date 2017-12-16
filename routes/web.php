@@ -68,3 +68,5 @@ Route::post('/accessdelete','AccessController@deleteAccess');
 
 Route::post('/assigntag/{id}','AddtagController@index');
 Route::post('/taggdelete/{id}','AddtagController@delete');
+
+Route::post('/upload_pic','FileController@upload_pic');

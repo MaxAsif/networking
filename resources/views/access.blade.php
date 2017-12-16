@@ -222,6 +222,9 @@
 
           </form>
         </div>
+        <div class="panel-footer">
+          <strong>Note :</strong> Clicking on more than one tag will give them acces to those alums which have all the chosen tags.
+        </div>
       </div>
     </div>
   </div>
