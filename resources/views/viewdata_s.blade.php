@@ -92,9 +92,9 @@ alert("Emails have been succesfully copied!");
           }
           $i++;
           if($i == 1)
-           echo '<li class="active"><a data-toggle="tab" href="#'.$i.'">'.$name.'</a></li>';
+           echo '<li class="active"><a data-toggle="tab" href="#tab'.$i.'">'.$name.'</a></li>';
          else
-          echo '<li><a data-toggle="tab" href="#'.$i.'">'.$name.'</a></li>';
+          echo '<li><a data-toggle="tab" href="#tab'.$i.'">'.$name.'</a></li>';
       }
       $i=0;
       @endphp
@@ -115,9 +115,9 @@ alert("Emails have been succesfully copied!");
         $name = $name.' '.$tag;
       }
       if($i==0)
-        echo '<div id="'.++$i.'" class="tab-pane fade in active">';
+        echo '<div id="tab'.++$i.'" class="tab-pane fade in active">';
       else
-       echo '<div id="'.++$i.'" class="tab-pane fade">';
+       echo '<div id="tab'.++$i.'" class="tab-pane fade">';
      @endphp
      <table id="myTable{{$i}}"  class="table table-striped table-bordered results" cellspacing="0" width="100%">
       <br>
