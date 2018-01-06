@@ -12,6 +12,7 @@ class AccessController extends Controller
 {
   public function index()
   {
+    //opens a window where we can manage accesses to a student member by a coordinator
    $smembers  = smember::get();
    $tags = Tagslist::get();
    return view('access',compact('smembers','tags')) ;  
@@ -20,7 +21,7 @@ class AccessController extends Controller
 
 
  public function post()
- {
+ {//creates a new access to a Student Member in database by creating a code which contains id of all the access given to them
 
   if(request('tag')=="0")
   {
@@ -81,6 +82,7 @@ class AccessController extends Controller
 } 
 public function deleteAccess()
 {
+  //deletes an existing access to a Student Member
   $access = request('access_del');
   $arr = explode(' ', $access);
   $access_id = '';
