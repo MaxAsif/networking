@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use Auth;
 class FileController extends Controller
 {
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	public function upload_pic(Request $request)
 	{	
 		$user = Auth::user();

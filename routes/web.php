@@ -32,10 +32,8 @@ Route::get('/viewdata','AlumniController@get');
 Route::get('/viewdata_s','AlumniController@get_s');
 Route::get('/year/{year}','AlumniController@getyear');
 Route::post('/notesedit/{id}','AlumniController@editnotes');
-Route::get('/addalumni',function(){
-	$message = '';
-	return view('addalumni',compact('message'));
-});//this function opens the window for addition of data of a new alumnus
+Route::get('/addalumni','AlumniController@open');
+//this function opens the window for addition of data of a new alumnus
 Route::post('/addalumni','AlumniController@index');//this route posts request for addition of a new alumnus
 Route::post('/editalumnidata','AlumniController@editdata');//edits data of an existing alumnus
 

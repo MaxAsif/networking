@@ -9,6 +9,10 @@ use App\Addtag;
 class TagslistController extends Controller
 {
     //
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {//opens window where we can create/delete tags

@@ -10,6 +10,11 @@ use App\access;
 
 class AccessController extends Controller
 {
+   public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
   public function index()
   {
     //opens a window where we can manage accesses to a student member by a coordinator

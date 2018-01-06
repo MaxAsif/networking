@@ -13,70 +13,79 @@ use App\smember;
 session_start();
 class AlumniController extends Controller
 {
-  public function index()
-  {
+ public function __construct()
+ {
+  $this->middleware('auth');
+}
+public function open()
+{
+  $message = '';
+  return view('addalumni',compact('message'));
+}
+public function index()
+{
 //this alumni adds data of a new alumnus to database
-    $this->validate(request(),[
-      'name' => 'required',
-      'email' => 'required',
-      'address' => 'required',
-      'city' => 'required',
-      'country' => 'required',
-      'mobile' => 'required',
+  $this->validate(request(),[
+    'name' => 'required',
+    'email' => 'required',
+    'address' => 'required',
+    'city' => 'required',
+    'country' => 'required',
+    'mobile' => 'required',
 
-      'dob' => 'required',
-      'industry' => 'required',
-      'year' => 'required',
-    ]);
-    Alumni::create([
-      'name' => request('name'),
-      'email' => request('email'),
-      'address' => request('address'),
-      'city' => request('city'),
-      'country' => request('country'),
-      'mobile' => request('mobile'),
+    'dob' => 'required',
+    'industry' => 'required',
+    'year' => 'required',
+  ]);
+  Alumni::create([
+    'name' => request('name'),
+    'email' => request('email'),
+    'address' => request('address'),
+    'city' => request('city'),
+    'country' => request('country'),
+    'mobile' => request('mobile'),
 
-      'dob' => request('dob'),
-      'industry' => request('industry'),
-      'year' => request('year'),
-      'notes' =>" "
-    ]);
-    $message = 'Alumni has been added to databse succesfully!';
-    return view('addalumni',compact('message'));
-  }
-  public function get()
-  {
+    'dob' => request('dob'),
+    'industry' => request('industry'),
+    'year' => request('year'),
+    'notes' =>" "
+  ]);
+  $message = 'Alumni has been added to databse succesfully!';
+  return view('addalumni',compact('message'));
+}
+public function get()
+{
     //this function gives alumni data to coordinators
-    $alumni = Alumni::get();
-    $message = '';
-    $tags = Tagslist::get();
+  $alumni = Alumni::get();
+  $message = '';
+  $tags = Tagslist::get();
 
-    
-    return view('viewdata',compact('message','tags','alumni'));
-  }
-  public function getyear($year)
-  {
+  
+  return view('viewdata',compact('message','tags','alumni'));
+}
+public function getyear($year)
+{
     //this function sends the alumni data of a particular year.However,currently it has been removed but can be added if needed.
-    $alumni = Alumni::where('year',$year)->get();
-    $message = '';
-    $tags = Tagslist::get();
+  $alumni = Alumni::where('year',$year)->get();
+  $message = '';
+  $tags = Tagslist::get();
 
 
-    
-    return view('viewdata',compact('message','tags','alumni'));
-  }
-  public function editt($id)
-  {
+  
+  return view('viewdata',compact('message','tags','alumni'));
+}
+public function editt($id)
+{
     //opens window where we can update data
-    
-    $alumni = Alumni::where('id',$id)->get();
-    $message = '';
-    $tags = Tagslist::get();
 
-    
-    return view('editdata',compact('alumni','message','tags'));
-  }
-  public function profile($id)
+  $alumni = Alumni::where('id',$id)->get();
+  $message = '';
+  $tags = Tagslist::get();
+
+  
+  return view('editdata',compact('alumni','message','tags'));
+}
+public function profile($id)
   {//opens a new window to open profile of a particular alumnus
 
     $alumni = Alumni::where('id',$id)->get();
