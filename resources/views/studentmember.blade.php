@@ -78,12 +78,15 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <div class="w3-display-container">
 
          <a class="modal-trigger" href="#modal1" data-toggle="modal" data-target="#modal1">
+          @if(file_exists(Auth::user()->pro_pic))
           <img src="<?php if (!empty(Auth::user()->pro_pic)){echo Auth::user()->pro_pic; } else { echo 'avatar_hat.jpg';}?>" style="width:100%" alt="Avatar">
-
+          @else
+          <img src="<?php echo 'avatar_hat.jpg';?>" style="width:100%" alt="Avatar">
+          @endif
           <figcaption class="figure-caption text-right">Click on the image to change profile pic.</figcaption>
         </a>
 
-        <div class="w3-display-bottomleft w3-container w3-text-black">
+        <div class="w3-display-bottomleft w3-container w3-text-black" style="background-color: white;">
           <h2>{{Auth::user()->name}}</h2>
         </div>
       </div>
