@@ -11,6 +11,7 @@ class AddtagController extends Controller
 {
   public function index($id)
   {
+    //function adds a new tag to an alumnus and stores it in database
     $a = Addtag::where('alum_id',$id)->where('tags',request('tag'))->get();
     $b = $a->toArray();
 
@@ -38,7 +39,7 @@ class AddtagController extends Controller
       }
       public function delete($id)  
       {
-
+        //deletes existing tag assigned to an alumnus 
 
         $alum=Addtag::find(request('tagd'));
         $alum->delete(); 

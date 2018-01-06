@@ -35,12 +35,12 @@ Route::post('/notesedit/{id}','AlumniController@editnotes');
 Route::get('/addalumni',function(){
 	$message = '';
 	return view('addalumni',compact('message'));
-});
-Route::post('/addalumni','AlumniController@index');
-Route::post('/editalumnidata','AlumniController@editdata');
+});//this function opens the window for addition of data of a new alumnus
+Route::post('/addalumni','AlumniController@index');//this route posts request for addition of a new alumnus
+Route::post('/editalumnidata','AlumniController@editdata');//edits data of an existing alumnus
 
-Route::get('/editalum/{id}','AlumniController@editt');
-Route::get('/profile/{id}','AlumniController@profile');
+Route::get('/editalum/{id}','AlumniController@editt');//opens window to edit data
+Route::get('/profile/{id}','AlumniController@profile');//allows us to open profile of a particular alumnus
 
 
 /*
@@ -48,25 +48,25 @@ Route::get('/profile/{id}','AlumniController@profile');
 
 */
 
-Route::get('/addtag','TagslistController@index');
-Route::post('/addtag','TagslistController@postdata');
-Route::post('/deletetag','TagslistController@deletedata');
+Route::get('/addtag','TagslistController@index');//opens page where wen can create/delete new tags
+Route::post('/addtag','TagslistController@postdata');//sends a request to create new tag
+Route::post('/deletetag','TagslistController@deletedata');//sends request to delete an existing tag
 
 /*
 	Acess Controller is used to give acess to students and view student member dashboard
 
 */
 
-Route::post('/access','AccessController@post');
-Route::get('/access','AccessController@index');
-Route::post('/accessdelete','AccessController@deleteAccess');
+Route::post('/access','AccessController@post');//gives a new access to student member
+Route::get('/access','AccessController@index');//opens a window where we can manage access of student members by coordinator
+Route::post('/accessdelete','AccessController@deleteAccess');//deletes an existing access to Student member
 
 /*
 	Assigntag controller is used to assign tag to the alum and delete it
 
 */
 
-Route::post('/assigntag/{id}','AddtagController@index');
-Route::post('/taggdelete/{id}','AddtagController@delete');
+Route::post('/assigntag/{id}','AddtagController@index');//assigns a new tag to a alumnus
+Route::post('/taggdelete/{id}','AddtagController@delete');//delets tag assigned to an alumnus
 
-Route::post('/upload_pic','FileController@upload_pic');
+Route::post('/upload_pic','FileController@upload_pic');//uploads profile pic

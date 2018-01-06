@@ -15,6 +15,7 @@ class AlumniController extends Controller
 {
   public function index()
   {
+//this alumni adds data of a new alumnus to database
     $this->validate(request(),[
       'name' => 'required',
       'email' => 'required',
@@ -45,6 +46,7 @@ class AlumniController extends Controller
   }
   public function get()
   {
+    //this function gives alumni data to coordinators
     $alumni = Alumni::get();
     $message = '';
     $tags = Tagslist::get();
@@ -54,6 +56,7 @@ class AlumniController extends Controller
   }
   public function getyear($year)
   {
+    //this function sends the alumni data of a particular year.However,currently it has been removed but can be added if needed.
     $alumni = Alumni::where('year',$year)->get();
     $message = '';
     $tags = Tagslist::get();
@@ -64,6 +67,7 @@ class AlumniController extends Controller
   }
   public function editt($id)
   {
+    //opens window where we can update data
     
     $alumni = Alumni::where('id',$id)->get();
     $message = '';
@@ -73,7 +77,7 @@ class AlumniController extends Controller
     return view('editdata',compact('alumni','message','tags'));
   }
   public function profile($id)
-  {
+  {//opens a new window to open profile of a particular alumnus
 
     $alumni = Alumni::where('id',$id)->get();
 
@@ -81,7 +85,7 @@ class AlumniController extends Controller
     return view('profile',compact('alumni'));
   }
   public function editdata()
-  {
+  {//updates data of the aluumnus in database
 
 /*
  $alum=Alumni::find(request('id'));
@@ -128,6 +132,7 @@ class AlumniController extends Controller
 
           public function get_s()
           {
+            //this function gives alumni data to student members
            $user_name = Auth::user()->name;
 
            $student_id = smember::where('name',$user_name)->first()->id;
@@ -180,6 +185,7 @@ class AlumniController extends Controller
         }
         public function editnotes($id)
         {
+          //each alumni has some notes attatched to it for reference which can be editted here
           Alumni::where('id', $id)
           ->update([
 

@@ -11,7 +11,7 @@ class TagslistController extends Controller
     //
 
     public function index()
-    {
+    {//opens window where we can create/delete tags
 
     	$alumni = Tagslist::get();
     	return view('addtag',compact('alumni'));
@@ -19,7 +19,7 @@ class TagslistController extends Controller
 
 
     public function postdata()
-    {
+    {//adds a new tag to database
 
     	
         $this->validate(request(),[
@@ -41,7 +41,7 @@ class TagslistController extends Controller
         }
     }
     public function deletedata()
-    {  
+    {  //deletes an existin tag from database
         //dd(request('tag'));
         $name_tag = Tagslist::find(request('tag'))->tagname;
         $alum_id_list = Addtag::where('tags',$name_tag)->get()->pluck('id')->toArray();
